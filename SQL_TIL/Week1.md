@@ -50,7 +50,7 @@
 ~~~
 
 <!-- 새롭게 배운 내용을 자유롭게 정리해주세요.-->
-```
+
 OLTP(Online Transaction Processing)
 - MySQL, Oracle, PostgreSQL 등
 - 거래를 하기 위해 사용되는 데이터베이스
@@ -71,8 +71,7 @@ SQL(Structed Query Language)
 - SQL: 데이터베이스에서 데이터를 가지고 올 때 사용하는 언어
         데이터베이스의 데이터를 관리하기 위해 설계된 특수 목적의 프로그래밍 언어
 - 쿼리문, 쿼리 구문, 쿼리를 짠다, SQL 쿼리 등으로 표현 
-```
-```
+
 BigQuery
 - Google Cloud의 데이터 웨어하우스
 - 장점
@@ -93,7 +92,6 @@ BigQuery의 환경 구성 요소
 1) 프로젝트(Project)
 2) 데이터셋(Dataset)
 3) 테이블(Table)
-```
 
 
 ## 2-1. 데이터 활용 Overview
