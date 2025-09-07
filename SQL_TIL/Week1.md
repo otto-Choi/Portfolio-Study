@@ -204,7 +204,7 @@ cf. ERD가 없는 경우
     평점
     리뷰 내용
 
-    
+<img width="644" height="427" alt="관계" src="https://github.com/user-attachments/assets/3fe462c4-0471-4b7f-824e-0e66c819e20b" />
 ~~~
 
 
