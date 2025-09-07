@@ -152,6 +152,7 @@ cf. ERD가 없는 경우
 ---
 # 2️⃣ 학습 인증란
 <!-- 이 글을 지우고, 여기에 학습한 것을 인증해주세요.-->
+<img width="403" height="620" alt="Week1" src="https://github.com/user-attachments/assets/2ea63751-1b3e-42dd-b231-aa59143354ea" />
 
 
 <br>
