@@ -48,6 +48,19 @@
 
 <!-- 새롭게 배운 내용을 자유롭게 정리해주세요.-->
 
+SELECT를 사용할 때, 여러 열을 가져오고 싶은 경우 ,를 사이에 넣는다.<br>
+FROM을 사용할 때 " 또는 '를 붙이지 않는다.<br>
+WHERE을 사용할 때 문자형인 경우 "를 사용한다.<br>
+AS 사용시 " 또는 '를 붙이지 않는다.<br>
+```
+SELECT: 테이블의 어떤 컬럼을 선택(출력)할 것인가?
+    Col1 AS new_name: Col1을 new_name으로 가져온다
+    EXCEPT Col2: Col2를 제외한 모든 컬럼
+FROM Dataset.Table: 어떤 테이블에서 데이터를 확인할 것인가?
+WHERE: 만약 원하는 조건이 있다면 어떤 조건인가?
+```
+
+테이블 명 기입시 대소문자를 구분한다.
 
 ## 2-5. 집계 (Group By / HAVING / SUM,COUNT)
 
@@ -59,6 +72,80 @@
 ~~~
 
 <!-- 새롭게 배운 내용을 자유롭게 정리해주세요.-->
+GROUP BY: 같은 값끼리 모아서 그룹화한다.<br>
+이 때, 특정 컬럼을 기준으로 모으면서 다른 컬럼에선 집계 가능하다.(합, 평균, MAX, MIN 등)
+
+그룹화 활용 예시
+- 일자별 집계
+- 연령대별 집계
+- 특정 타입별 집계
+- 앱 화면별 집계
+- 기타 등등
+
+```
+SELECT<br>
+    집계할_컬럼1,
+    집계 함수(COUNT, MAX, MIN 등)
+FROM Table
+GROUP BY
+    집계할_컬럼1
+```
+
+- AVG: 평균
+- COUNT: 개수(ROW)
+- COUNTIF: 조건부 개수
+- MAX: 최대값
+- MIN: 최소값
+- SUM: 합계
+- DISTINCT: 여러 값 중 Unique한 것만 보고 싶은 경우 사용(중복 제거)
+
+함수 사용시 엑셀 처럼 괄호를 사용한다.<br>
+예: count(id)
+
+distinct 사용시 띄어쓰기를 사용한다.<br>
+예: count(distinct id)
+
+<hr/>
+
+
+ORDER BY <컬럼> <순서><br>
+- DESC: 내림차순
+- OSC: 오름차순(보통 Default이므로 기재할 필요 없을 듯 하다.)
+- ORDER BY는 쿼리의 맨 마지막(아래)에 두고, 쿼리의 맨 마지막에만 작성하면 됨(중간엔 필요없음)
+
+LIMIT
+- 쿼리문의 결과 Row 수를 제한하고 싶은 경우 사용
+- 쿼리문의 제일 마지막에 작성
+
+<hr/>
+
+WHERE과 HAVING 비교
+- WHERE
+    - 테이블에 바로 조건을 사용하고 싶은 경우 사용
+    - Raw Data인 테이블 데이터에서 조건 설정
+- HAVING
+    - GROUP BY 한 후 조건을 설정하고 싶은 경우 사용
+    - 집계 하여 AS로 지정한 열에 대한 조건을 설정하는 경우 이를 활용한다.
+    - 서브쿼리 활용시 HAVING 대신 WHERE을 쓸 수는 있다.
+
+서브 쿼리
+- SELECT 문 안에 존재하는 SELCET 쿼리
+- FROM 절에 또 다른 SELECT 문을 넣을 수 있음
+- 괄호로 묶어서 사용
+
+<hr/>
+
+요약, 집계, 그룹화 정리
+|상황|사용하는 기능|
+|---|---|
+집계하고 싶은 경우|GROUP BY + 집계함수(AVG, MAX 등)
+고유값을 알고 싶은 경우|DISTINCT
+조건을 설정하고 싶은 경우|WHERE/HAVING
+정렬하고 싶은 경우|ORDER BY
+출력 개수를 제한하고 싶은 경우|LIMIT
+
+<br>
+
 
 
 
@@ -87,10 +174,18 @@ WHERE type = 'Electric';
 FROM pokemon;
 ~~~
 
-
-
+1. pokemon 테이블의 한국어 이름으로 지정된 열은 kor_name이다. name을 kor_name으로 수정해야 한다.
+2. AS를 이용해 한국어 열을 지정하려면 백틱(`)을 활용해야 한다.
+3. WHERE문은 FROM문보다 나중에 사용되어야 한다.
+4. FROM문 사용시, 경로를 적절히 설정해 주어야 한다.
+5. 포켓몬의 첫번째 타입에 대한 열의 이름은 type1이다. type을 type1로 수정해야 한다.
 ~~~
-여기에 답을 작성해주세요!
+SELECT
+    kor_name AS `포켓몬 이름`,
+    ID
+FROM basic.pokemon
+WHERE
+    type1 = 'Electric'
 ~~~
 
 
@@ -105,11 +200,19 @@ FROM pokemon
 WHERE AVG(attack) >= 60
 GROUP BY type;
 ~~~
-
-
-
+1. 포켓몬의 첫번째 타입에 대한 열의 이름은 type1이다. type을 type1로 수정해야 한다.
+2. FROM문 사용시, 경로를 적절히 설정해 주어야 한다.
+3. 타입별 평균 공격력을 나타내는 avg_attack이 60 이상인 경우를 고르는 것이므로 GROUP BY문을 사용한다.
+4. GROUP BY문을 WHERE문보다 나중에 오도록 한다.
 ~~~
-여기에 답을 작성해주세요.
+SELECT
+    type1,
+    AVG(attack) AS avg_attack
+FROM basic.pokemon
+GROUP BY
+    type1
+HAVING
+    avg_attack >= 60
 ~~~
 
 
