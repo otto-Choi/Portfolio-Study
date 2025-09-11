@@ -153,6 +153,7 @@ WHERE과 HAVING 비교
 
 <!-- 이 글을 지우고, 여기에 학습한 것을 인증해주세요.-->
 
+<img width="402" height="210" alt="image" src="https://github.com/user-attachments/assets/cc0558fe-edf2-4152-9086-4f0863c34359" />
 
 
 <br><br>
