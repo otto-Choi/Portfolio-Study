@@ -520,7 +520,9 @@ SELECT
 FROM
 WHERE
 ~~~
+현재 espanso 오류로 실행이 되지 않고 있습니다. 방법을 찾아 등록하도록 하겠습니다.
 
+일단은 바탕화면에 깔아두고 사용하는 마크다운 등이 담긴 메모장에 기재해 두었습니다.
 
 <br>
 <br>
@@ -566,10 +568,15 @@ ORDER BY (ㄱ) (ㄷ);
 
 
 
+~~~sql
+SELECT type1, COUNT(id)
+FROM pokemon
+GROUP BY type1
+ORDER BY COUNT(id) DESC;
 ~~~
-여기에 답을 작성해주세요!
-~~~
-
+(ㄱ) : COUNT(id)<br>
+(ㄴ) : GROUP BY<br>
+(ㄷ) : DESC
 
 
 ### 🎉 수고하셨습니다.
