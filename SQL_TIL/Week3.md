@@ -63,6 +63,194 @@
 
 <!-- 새롭게 배운 내용을 자유롭게 정리해주세요.-->
 
+#### 1번. 포켓몬 중에 type2가 없는 포켓몬의 수를 작성하는 쿼리를 작성해주세요.
+
+답안
+~~~sql
+select
+  count(id) as count
+from basic.pokemon
+where
+  type2 is null
+~~~
+
+모범답안
+~~~sql
+SELECT
+    COUNT(id) AS CNT
+FROM basic.pokemon
+WHERE
+    type2 IS NULL
+~~~
+<hr/>
+
+#### 2번. type2가 없는 포켓몬의 type1과 type1의 포켓몬 수를 알려주는 쿼리를 작성해 주세요. 단, type1의 포켓몬 수가 큰 순으로 정렬해주세요.
+
+답안
+~~~sql
+select
+  type1,
+  COUNT(id) AS CNT
+from basic.pokemon
+where
+  type2 is null
+group by type1
+~~~
+모범답안
+~~~sql
+SELECT
+    type1,
+    COUNT(id) AS pokemon_cnt
+FROM basic.pokemon
+WHERE
+    type2 IS NULL
+GROUP BY
+    type1
+ORDER BY
+    pokemon_cnt DESC
+~~~
+내림차순 하는 것을 누락했다.
+<hr/>
+
+#### 3번. type2 상관없이 type1의 포켓몬 수를 알 수 있는 쿼리를 작성해주세요.
+답안
+~~~sql
+select
+  type1,
+  COUNT(id) AS CNT
+from basic.pokemon
+group by type1
+~~~
+모범답안
+~~~sql
+SELECT
+    type1,
+    COUNT(id) AS pokemon_cnt
+FROM basic.pokemon
+GROUP BY
+    type1
+~~~
+<hr/>
+
+#### 4번. 전설 여부에 따른 포켓몬 수를 알 수 있는 쿼리를 작성해주세요.
+답안
+~~~sql
+select
+  is_legendary,
+  count(id) as cnt
+from basic.pokemon
+group by is_legendary
+~~~
+모범답안
+~~~sql
+SELECT
+    is_legendary,
+    COUNT(id) AS pokemon_cnt
+FROM basic.pokemon
+GROUP BY
+    is_legendary
+~~~
+<hr/>
+
+#### 5번. 동명이인이 있는 이름은 무엇일까요?
+답안
+~~~sql
+select
+  name,
+  count(name) as cnt
+from basic.trainer
+group by name
+having
+  cnt > 1
+~~~
+모범답안
+~~~sql
+SELECT
+    name,
+    COUNT(name) AS trainer_cnt
+FROM basic.trainer
+GROUP BY
+    name
+HAVING
+    trainer_cnt >= 2
+~~~
+<hr/>
+
+#### 6번. trainer 테이블에서 "Iris" 트레이너의 정보를 알 수 있는 쿼리를 작성해주세요.
+답안
+~~~sql
+select
+  *
+from basic.trainer
+where
+  name = 'Iris'
+~~~
+모범답안
+~~~sql
+SELECT
+    *
+FROM basic.trainer
+WHERE
+    name = "Iris"
+~~~
+<hr/>
+
+#### 7번. trainer 테이블에서 "Iris", "Whitney", "Cynthia" 트레이너의 정보를 알 수 있는 쿼리를 작성해주세요.
+답안
+~~~sql
+select
+  *
+from basic.trainer
+where
+  name in ("Iris", "Whitney", "Cynthia")
+~~~
+모범답안
+~~~sql
+SELECT
+    *
+FROM basic.trainer
+WHERE
+    name IN ("Iris", "Whitney", "Cynthia")
+~~~
+<hr/>
+
+#### 8번. 전체 포켓몬 수는 얼마나 되나요?
+답안
+~~~sql
+select
+  count(id)
+FROM basic.pokemon
+~~~
+모범답안
+~~~sql
+SELECT
+    COUNT(ID) AS pokemon_cnt
+FROM basic.pokemon
+~~~
+<hr/>
+
+#### 9번. 세대별로 포켓몬 수가 얼마나 되는지 알 수 있는 쿼리를 작성해주세요.
+답안
+~~~sql
+SELECT
+  generation,
+  count(id)
+FROM basic.pokemon
+GROUP BY
+  generation
+~~~
+모범답안
+~~~sql
+SELECT
+   generation,
+  count(id) AS pokemon_cnt
+FROM basic.pokemon
+GROUP BY
+  generation
+~~~
+<hr/>
+
+
 
 
 ## 2-8. 새로운 집계함수
