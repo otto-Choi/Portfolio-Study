@@ -531,6 +531,7 @@ WHERE
 
 <!-- 이 글을 지우고, 여기에 학습한 것을 인증해주세요.-->
 
+<img width="396" height="883" alt="image" src="https://github.com/user-attachments/assets/77df7f14-b148-4b44-a0ea-91931f5848ff" />
 
 
 <br><br>
