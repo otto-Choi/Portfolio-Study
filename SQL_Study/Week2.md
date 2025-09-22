@@ -214,6 +214,9 @@ WHERE (E.departmentID, E.salary) IN (
 
 <!-- 이 주석을 지우고 여기에 문제 푼 인증사진을 올려주세요. -->
 
+<img width="686" height="443" alt="image" src="https://github.com/user-attachments/assets/88d1d949-6e7d-4dba-b463-49d983c5c01a" />
+
+<img width="685" height="440" alt="image" src="https://github.com/user-attachments/assets/02b36bc7-5612-4af6-9521-deabc8850a00" />
 
 
 ---
