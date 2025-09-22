@@ -86,6 +86,21 @@
 
 <!-- 새롭게 배운 내용을 자유롭게 정리해주세요.-->
 
+예시에서 헤더와 데이터를 구분하지 못해서 한참 헤맸으나 해결했다.<br>
+UNION에선 중복이 제거된다. 중복값도 모두 보기 위해선 UNION ALL을 이용한다.<br>
+JOIN이 가로로 합치는 것 이라면, UNION은 세로로 합치는 것 인 것 같다.
+
+집합연산
+- UNION: 두 쿼리 블록의 모든 결과를 결합하고, 중복 제거
+    - 교환법칙 성립
+- INTERSECT: 두 쿼리 블록 모두에 공통으로 존재하는 행만 반환, 중복 제거
+    - 교환법칙 성립
+- EXCEPT: 두 쿼리 블록 A, B에서 A에만 존제하고 B에는 없는 행 반환, 중복 제거
+    - 교환법칙 불가
+- 집합 연산자 + ALL: 중복을 제거하지 않음
+- 집합 연산자 + DiSTINCT: 중복을 제거함(기본값, 생략 가능)
+
+ORDER BY, LIMIT을 전체 결과에 적용하려면 마지막에 배치한다.
 
 
 ## 2. 그룹함수
@@ -99,9 +114,28 @@
 
 <!-- 새롭게 배운 내용을 자유롭게 정리해주세요.-->
 
+주요 집계 함수 목록
+- AVG()
+- COUNT()
+- MAX()
+- MIN()
+- SUM()
 
+시간형에 동작하지 않는 집계 함수
+- SUM()
+- AVG()
 
+<hr/>
 
+AVG([DISTINCT]expr)[over_clause]
+- expr의 평균값을 반환한다. DISTINCT의 경우 서로 다른 값 만의 평균을 구한다.
+- 일치 행이 없거나 expr이 NULL이면 NULL을 반환한다.
+- OVER 사용 시 윈도 함수로 실행 가능하다.
+
+COUNT
+- (*)으로 정확한 총 행수를 저장하지 않으므로 가시 행만 집계
+- COUNT(DISTINCT expr[,expr...])
+    - 서로 다른 NULL이 아닌 표현식(들)의 조합 수
 
 <br><br>
 
@@ -115,11 +149,64 @@ https://leetcode.com/problems/customers-who-never-order/
 >
 > 학습 포인트 : 주문 내역이 없는 고객을 찾기 위한 패턴 익히기  
 
+초안
+~~~sql
+# Write your MySQL query statement below
+SELECT
+    c.name
+FROM Customers AS c
+JOIN (
+    SELECT
+        id
+    FROM Orders) as O
+ON c.id = o.customerID
+WHERE
+    c.id IS NOT NULL
+~~~
+에러가 발생했다.
+- JOIN 내부쿼리가 필요하지 않음
+- JOIN이 아닌 INNER JOIN이 필요함
+- 마지막 WHERE문에서 c.id가 아닌 o.id가 사용되어야 함
+
+
+
+최종 답안
+~~~sql
+SELECT
+    c.name as Customers
+FROM Customers AS c
+LEFT JOIN Orders as o
+ON c.id = o.customerID
+WHERE
+    o.id IS NULL
+~~~
+
+
+
 https://leetcode.com/problems/department-highest-salary/description/
 
 > LeetCode 184. Department Highest Salary
 >
 > 학습 포인트 : 부서별 최고 연봉자 추출을 위한 **그룹별 정렬 / 필터링** 방식 이해하기
+
+
+~~~sql
+SELECT
+    D.name AS Department,
+    E.name AS Employee,
+    E.salary AS Salary
+FROM Employee as E
+LEFT JOIN Department as D
+    ON E.departmentId = D.id
+WHERE (E.departmentID, E.salary) IN (
+    SELECT 
+        S.departmentId,
+        MAX(s.salary)
+    FROM Employee as S
+    GROUP BY departmentId
+)
+~~~
+서브쿼리를 WHERE문에 사용하는 것 에서 어려움을 겪었지만, '2 컬럼 IN' 을 사용하여 해결했다.
 
 ---
 
@@ -147,9 +234,12 @@ SELECT name FROM blackList;
 
 <br>
 
+~~~sql
+SELECT name FROM member
+UNION ALL
+SELECT name FROM blackList;
 ~~~
-여기에 답을 작성해주세요!
-~~~
+UNION만 사용하는 경우 중복된 값은 제거되기 때문에 중복 관계없이 모든 내용을 확인하고 싶을 때는 UNION ALL을 사용해야 한다.
 
 ## 참고자료
 그룹 함수가 많아서 중요하게 많이 쓰이는 함수들을 정리해놓은 참고자료를 첨부합니다. 아래 블로그를 통해서 더욱 쉽게 공부해보시고 문제를 풀어보세요.
