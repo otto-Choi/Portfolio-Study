@@ -57,6 +57,25 @@
 <!-- 새롭게 배운 내용을 자유롭게 정리해주세요.-->
 
 
+Syntax error: 문법 오류
+- Number of arguments does not match for aggregate function
+  - 집계 함수의 인자 수가 일치하지 않는 경우
+- SELECT list expression references column type1 a which is neither grouped nor aggregated
+  - SELECT 목록 식은 다음에서 그룹화되거나 집계되지 않은 열을 참조합니다.
+  - GROUP BY에 적절한 컬럼을 명시하지 않았을 경우 발생
+- Expected end of input but got keyword SELECT
+  - 입력이 끝날 것으로 예상되었지만 SELECT 키워드가 입력되었습니다.
+- Expected end of input but got keyword WHERE at [n:n]
+  - 입력이 끝날 것으로 예상되었지만 키워드 WHERE을 얻었습니다.
+  - 중간에 LIMIT이 쓰여있는 경우 등 발생
+- Expected ")" but got end of script at [n:n]
+  - 괄호를 작성하지 않은 경우
+
+<hr/>
+
+오류 발견시
+- 오류 메세지를 해석
+- 생성형 AI, 지인 등의 도움을 받음
 
 ## 4-2. 데이터 타입과 데이터 변환(CAST, SAFE_CAST)
 
@@ -68,6 +87,25 @@
 
 <!-- 새롭게 배운 내용을 자유롭게 정리해주세요.-->
 
+데이터 타입
+- 숫자
+- 문자
+- 시간, 날짜
+- 부울(Bool)
+
+<hr/>
+
+CAST문: 자료 타입을 변경하는 함수
+
+~~~sql
+SELECT
+  CAST(1 AS STRING)
+또는
+SELECT
+  SAFE_CAST(1 AS STRING) 
+#자료 타입 변경이 실패할 경우 NULL 반환
+~~~
+SAFE_DIVIDE 등 수학 함수를 활용하면 오류를 줄일 수 있다.
 
 
 ## 4-3. 문자열 함수(CONCAT, SPLIT, REPLACE, TRIM, UPPER)
@@ -78,6 +116,16 @@
 ~~~
 
 <!-- 새롭게 배운 내용을 자유롭게 정리해주세요.-->
+
+문자열 함수
+- CONCAT: 문자열 붙이기
+  - CONCAT 인자로 STRING이나 숫자를 넣을 때는 데이터를 직접 넣는 것이다.
+  - FROM이 없어도 실행 가능하다.
+- SPLIT: 문자열 분리하기
+- REPLACE: 특정 단어 수정하기
+- TRIM: 문자열 자르기
+- UPPER: 영어 대문자 변환
+- LOWER: 영어 소문자 변환
 
 
 
@@ -91,6 +139,34 @@
 ~~~
 
 <!-- 새롭게 배운 내용을 자유롭게 정리해주세요.-->
+
+날짜 및 시간 데이터의 핵심
+1. 날짜 및 시간 데이터 타입 파악하기: DATE, DATETIME, TIMESTAMP
+2. 날짜 및 시간 데이터 관련 알면 좋은 내용: UTC, Millisecond
+3. 날짜 및 시간 데이터 타입 변환하기
+4. 시간 함수(두 시간의 차이, 특정 부분 추출하기)
+
+<hr/>
+
+- DATE: DATE만 표시하는 데이터(ex: 2025-09-24)
+- DATETIME: DATE와 TIME까지 표시하는 데이터(Timezone 정보 없음): 2025-09-24T23:41:00
+- TIME: 날짜와 무관하게 TIME만 표시하는 데이터: 23:41:00.00
+- TIMESTAMP: UTC로부터 경과한 시간을 나타내는 값(Timezone 정보 있음): 2025-09-24 23:41:00 UTC
+
+<hr/>
+
+- GMT: Greenwich Mean Time(한국시간: GMT+9)
+  - 영국 그리니치 천문대 기준
+- UTC: Universal Time Coordinated(한국시간: UTC+9)
+  - 국제적인 표준 시간
+  - 협정 세계시
+
+<hr/>
+
+milliseconds(ms): 시간의 단위, 천분의 1초로, 빠른 반응이 필요한 분야에서 사용 <br>
+microsecond(us): 1/1,000 ms
+
+
 
 
 
@@ -116,6 +192,16 @@
 
 <!-- 정답을 맞추게 되면, 정답입니다. 라는 칸이 생성되는데 이 부분을 캡처해서 이 주석을 지우시고 첨부해주시면 됩니다. --> 
 
+```sql
+SELECT
+    COUNT(USER_ID)
+FROM USER_INFO
+WHERE
+    YEAR(JOINED) = 2021 AND
+    AGE >= 20 AND
+    AGE <= 29
+```
+풀고 나서 아래 확인 문제를 보니 BETWEEN 함수를 활용하면 나이 필터링을 더 쉽게 할 수 있다는 것을 알게 되었다.
 
 
 ## 문제 1
@@ -141,11 +227,15 @@ WHERE AGE BETWEEN 20 AND 29
 오류 메시지 : SELECT list expression references column AGE which is neither grouped nor aggregated
 ~~~
 
+첫번째 풀이에선, COUNT 함수가 요구하는 것과 다른 개수의 요소가 포함되었다는 내용이다.<br>
+SELCET COUNT(AGE, JOINED)로 1개가 아닌 2개의 컬럼이 들어가있다. COUNT(USER_ID) 또는 COUNT(*)를 이용하면 오류가 나오지 않을 것이다.
+
+<hr/>
+두번째 풀이에선, SELECT 문에서 AGE 컬럼에 대한 그룹화가 이루어지지 않았다는 오류 메세지이다.<br>
+쿼리 하단에 GROUP BY AGE를 입력해 준다면 나이별로 몇명의 회원이 있는지 출력할 수 있을 것이다.
 
 
-~~~
-여기에 답을 작성해주세요!
-~~~
+
 
 
 
