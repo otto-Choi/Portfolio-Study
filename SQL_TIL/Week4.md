@@ -178,6 +178,10 @@ microsecond(us): 1/1,000 ms
 
 # 2️⃣ 확인문제 & 문제 인증
 
+<img width="397" height="517" alt="image" src="https://github.com/user-attachments/assets/780caae8-d92a-41d0-9ba6-f8967a2d51c9" />
+
+
+
 ## 프로그래머스 문제 
 
 > 조건에 맞는 회원 수 구하기 (SELECT, COUNT) 
@@ -191,6 +195,9 @@ microsecond(us): 1/1,000 ms
 <!-- 문제를 풀기 위하여 로그인이  필요합니다. -->
 
 <!-- 정답을 맞추게 되면, 정답입니다. 라는 칸이 생성되는데 이 부분을 캡처해서 이 주석을 지우시고 첨부해주시면 됩니다. --> 
+<img width="593" height="264" alt="image" src="https://github.com/user-attachments/assets/4717be71-0adc-487a-bf9d-5352c4385b9b" />
+
+
 
 ```sql
 SELECT
