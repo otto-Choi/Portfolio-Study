@@ -88,6 +88,40 @@
 
 <!-- 새롭게 배운 내용을 자유롭게 정리해주세요.-->
 
+### 14.20.2 내용
+윈도우 함수:  결과 행을 줄이지 않고(GROUP BY처럼 행 수 감소 없음), 각 행에 대해 정해진 창(window) 위에서 집계·순위·이전/다음 값 등을 계산해 열로 붙이는 기능
+
+“창(window)”은 PARTITION(그룹 나누기), ORDER(정렬 기준), FRAME(행 범위)로 정의
+
+- OVER(): 전체 행을 하나의 파티션으로 취급, 각 행에 전체 합계 표시
+- OVER(PARTITION BY country): (국가별) 파티션 합계 표시
+
+<hr/>
+
+윈도 함수로 사용 가능한 집계 함수(OVER 절이 있으면 윈도 함수, 없으면 일반 집계 함수로 동작)
+- AVG()
+- BIT_AND(), BIT_OR(), BIT_XOR()
+- COUNT()
+- JSON_ARRAYAGG(), JSON_OBJECTAGG()
+- MAX(), MIN()
+- STDDEV_POP(), STDDEV(), STD()
+- STDDEV_SAMP()
+- SUM()
+- VAR_POP(), VARIANCE()
+- VAR_SAMP()
+
+비집계 전용 윈도 함수(윈도 함수로만 사용 가능하며 OVER 절이 필수)
+- CUME_DIST()
+- DENSE_RANK()
+- FIRST_VALUE()
+- LAG(), LEAD()
+- LAST_VALUE()
+- NTH_VALUE()
+- NTILE()
+- PERCENT_RANK()
+- RANK()
+- ROW_NUMBER()
+<hr/>
 
 
 ---
@@ -101,6 +135,40 @@ https://leetcode.com/problems/department-top-three-salaries/
 > LeetCode 185. Department Top Three Salaries 
 >
 > 학습 포인트 : DENSE_RANK( ) + PARTITION BY 사용으로 그룹 내 상위 N개 추출
+
+~~~sql
+# Write your MySQL query statement below
+SELECT
+    d.name AS Department,
+    e.name as Employee,
+    e.salary over() AS Salary
+FROM Employee AS e
+LEFT JOIN Department as d
+    ON e.departmentId = d.id
+~~~
+이 이후에 감이 아예 안와서 GPT 활용했다.
+~~~sql
+# Write your MySQL query statement below
+SELECT
+    d.name AS Department,
+    e.name as Employee,
+    e.salary AS Salary
+FROM (
+    SELECT
+        e.*,
+        DENSE_RANK() OVER(
+            PARTITION BY e.departmentId
+            ORDER BY e.salary DESC
+        ) AS salary_rank
+    FROM Employee as E
+) AS e
+LEFT JOIN Department as d
+    ON e.departmentId = d.id
+WHERE e.salary_rank <= 3
+~~~
+
+
+
 
 https://leetcode.com/problems/consecutive-numbers/
 
