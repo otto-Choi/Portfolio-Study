@@ -166,6 +166,7 @@ LEFT JOIN Department as d
     ON e.departmentId = d.id
 WHERE e.salary_rank <= 3
 ~~~
+<img width="693" height="445" alt="image" src="https://github.com/user-attachments/assets/43e63d1c-8ad9-41db-95ad-6ae1d84575e1" />
 
 
 
