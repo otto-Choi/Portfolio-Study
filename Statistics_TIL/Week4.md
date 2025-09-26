@@ -165,11 +165,34 @@ Cramer's coefficient|명목 - 명목(2X2 이상)
 
 <!-- 이 주석을 지우고 “실습 결과 화면(캡처)을 이곳에 첨부해주세요.-->
 
-필사 느낌으로 교재의 코드를 따라 적고, 출력된 시각화 자료를 아래에 첨부했습니다.
 
-~~~
-인증 이미지가 없으면 과제 수행으로 인정되지 않습니다.
-~~~
+<img height="240" alt="image" src="https://github.com/user-attachments/assets/38ff6c50-f627-4253-92a6-432699942a3a" />
+<img height="240" alt="image" src="https://github.com/user-attachments/assets/99be4593-2ce4-43cc-9963-d8a5190ddd26" />
+<img height="240" alt="image" src="https://github.com/user-attachments/assets/5aba9c52-bec7-44b0-8c62-a89ff4c87360" />
+<img height="240" alt="image" src="https://github.com/user-attachments/assets/67c8edb0-17d1-4c1b-9299-33bc0b2c8dea" />
+<img height="240" alt="image" src="https://github.com/user-attachments/assets/82061a67-e13c-4d12-b639-2a527aac50d5" />
+<img height="240" alt="image" src="https://github.com/user-attachments/assets/108bf28a-076e-413c-902e-92219f2b627d" />
+<img height="240" alt="image" src="https://github.com/user-attachments/assets/1cb5abce-372e-496e-92b3-ed4e2755161b" />
+<img height="240" alt="image" src="https://github.com/user-attachments/assets/31731577-241a-46b2-a499-35aa6425352e" />
+<img height="240" alt="image" src="https://github.com/user-attachments/assets/3b1d1996-b915-4bde-bbe5-059e8d8ae701" />
+<img height="240" alt="image" src="https://github.com/user-attachments/assets/e1493a55-a5cb-4044-a1b3-3dd242d64565" />
+<img height="240" alt="image" src="https://github.com/user-attachments/assets/9575bc3b-d7e5-4e7c-86cf-e80c5278c35b" />
+<img height="240" alt="image" src="https://github.com/user-attachments/assets/21618d4c-09ce-4383-bbab-5d49b21d17bf" />
+<img height="240" alt="image" src="https://github.com/user-attachments/assets/6d5c94d8-12a1-478e-b56e-699249ec5de4" />
+<img height="240" alt="image" src="https://github.com/user-attachments/assets/690b24e0-62a0-42bf-93e9-5bfcdc70d6e6" />
+<img height="240" alt="image" src="https://github.com/user-attachments/assets/afe485a4-ea34-4eee-a6da-0f676f1586c7" />
+<img height="240" alt="image" src="https://github.com/user-attachments/assets/d5a08afc-5e90-4693-b692-ec456a1a25a0" />
+<img height="240" alt="image" src="https://github.com/user-attachments/assets/fc65e11f-11c9-41b9-92b2-de1fb488fea9" />
+<img height="240" alt="image" src="https://github.com/user-attachments/assets/af2e68aa-53c8-4340-85cc-ec88fef80fc0" />
+<img height="240" alt="image" src="https://github.com/user-attachments/assets/111ac1a9-e88e-469a-981f-b79daa4d85dc" />
+<img height="240" alt="image" src="https://github.com/user-attachments/assets/0caf1c5a-b008-4f0c-ab5a-ecd13dc4365e" />
+<img height="240" alt="image" src="https://github.com/user-attachments/assets/8216b39a-6884-436e-8969-da0dc344ad84" />
+<img height="240" alt="image" src="https://github.com/user-attachments/assets/56a97c9c-df79-4fdc-8787-f84fdaba2166" />
+<img height="240" alt="image" src="https://github.com/user-attachments/assets/8a859c88-5d16-4563-b4ef-5a944c9d470b" />
+
+
+
+
 
 
 
