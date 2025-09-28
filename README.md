@@ -5,9 +5,9 @@
 
 ---
 
-## 📂 Repository Structure
+## Repository Structure
 
-### 📝 개인 학습 기록 (TIL: Today I Learned)
+### 개인 학습 기록 (TIL: Today I Learned)
 - **[SQL_TIL](./SQL_TIL/)**  
   학회 커리큘럼 기반 SQL 주간 학습 기록  
 - **[Statistics_TIL](./Statistics_TIL/)**  
@@ -17,19 +17,19 @@
 
 ---
 
-### 👥 팀 학습 기록 (Study)
+### 팀 학습 기록 (Study)
 - **[SQL_Study](./SQL_Study/)**  
   팀 단위로 진행한 SQL 학습 활동 및 주간 기록  
 
 ---
 
-### 🎯 실습형 미니 프로젝트
+### 실습형 미니 프로젝트
 - **[Titanic_miniproject](./Titanic_miniproject/)**  
   Kaggle Titanic 데이터를 활용한 예측 실습  
   - 데이터 전처리, 탐색적 분석(EDA), 모델 학습 및 평가까지 일련의 과정을 포함  
 
 ---
 
-## 📌 Note
+## Note
 - 본 저장소는 **학습 과정을 기록하고 정리**하는 데 중점을 두고 있습니다.  
 - 프로젝트는 별도의 `Project-*` 저장소에서 관리합니다.
