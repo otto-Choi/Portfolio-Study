@@ -210,6 +210,8 @@ num당 하나의 값만 보이게 하기 위해 DISTINCT를 할용헀다.<br>
 SELECT 절에서 새로운 피쳐를 만드는 것이 아니라 FROM에서 서브쿼리를 활용해야 출력되는 열을 제한할 수 있다.<br>
 OVER절 활용시 order by id를 통해 순서대로 연속되는 경우를 발견한다. 쓰지 않아도 무방하나, 쓰지 않은 경우 효율성이 하락하는걸 발견했다.
 
+<img width="783" height="555" alt="image" src="https://github.com/user-attachments/assets/2a34e737-e156-4362-99ce-5e89ff0db0ee" />
+
 
 
 https://leetcode.com/problems/last-person-to-fit-in-the-bus/
