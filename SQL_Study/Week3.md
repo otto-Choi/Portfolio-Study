@@ -177,6 +177,41 @@ https://leetcode.com/problems/consecutive-numbers/
 >
 > 학습 포인트 : LAG( ) 함수로 이전 값과 비교하여 연속 데이터 탐지 
 
+1차 시도
+~~~sql
+SELECT 
+    num AS ConsecutiveNums,
+    LAG(num, 1) OVER () AS prev,
+    LEAD(num, 1) OVER () AS next    
+FROM Logs
+WHERE
+    num = prev
+    AND
+    num = next
+;
+~~~
+
+perv라는 열의 이름을 가져오지 못한다는 오류 발생했다.
+진전이 나가지 않아 gpt 활용했다.
+
+~~~sql
+SELECT DISTINCT num AS ConsecutiveNums
+FROM (
+    SELECT num,
+           LAG(num, 1) OVER (ORDER BY id) AS prev_num,
+           LEAD(num, 1) OVER (ORDER BY id) AS next_num
+    FROM Logs
+) t
+WHERE num = prev_num
+  AND num = next_num;
+~~~
+
+num당 하나의 값만 보이게 하기 위해 DISTINCT를 할용헀다.<br>
+SELECT 절에서 새로운 피쳐를 만드는 것이 아니라 FROM에서 서브쿼리를 활용해야 출력되는 열을 제한할 수 있다.<br>
+OVER절 활용시 order by id를 통해 순서대로 연속되는 경우를 발견한다. 쓰지 않아도 무방하나, 쓰지 않은 경우 효율성이 하락하는걸 발견했다.
+
+
+
 https://leetcode.com/problems/last-person-to-fit-in-the-bus/
 
 > LeetCode 2481. Last Person to Fit in the Bus 
