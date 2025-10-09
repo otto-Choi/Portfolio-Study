@@ -88,7 +88,7 @@
 
 <!-- 새롭게 배운 내용을 자유롭게 정리해주세요.-->
 
-### 14.20.2 내용
+
 윈도우 함수:  결과 행을 줄이지 않고(GROUP BY처럼 행 수 감소 없음), 각 행에 대해 정해진 창(window) 위에서 집계·순위·이전/다음 값 등을 계산해 열로 붙이는 기능
 
 “창(window)”은 PARTITION(그룹 나누기), ORDER(정렬 기준), FRAME(행 범위)로 정의
@@ -122,6 +122,9 @@
 - RANK()
 - ROW_NUMBER()
 <hr/>
+
+윈도우 함수 사용시 MAX, MIN 등 집계 함수를 더 다양하게 활용할 수 있다.<br>
+범주별로 최댓값을 찾는 등 조인을 활용시 서브쿼리를 사용하여 복잡하게 작성해야 하는 내용을 윈도우 함수를 통해 간편하게 구성할 수 있다.
 
 
 ---
@@ -210,7 +213,7 @@ num당 하나의 값만 보이게 하기 위해 DISTINCT를 할용헀다.<br>
 SELECT 절에서 새로운 피쳐를 만드는 것이 아니라 FROM에서 서브쿼리를 활용해야 출력되는 열을 제한할 수 있다.<br>
 OVER절 활용시 order by id를 통해 순서대로 연속되는 경우를 발견한다. 쓰지 않아도 무방하나, 쓰지 않은 경우 효율성이 하락하는걸 발견했다.
 
-<img width="783" height="555" alt="image" src="https://github.com/user-attachments/assets/2a34e737-e156-4362-99ce-5e89ff0db0ee" />
+<img width="783" height="455" alt="image" src="https://github.com/user-attachments/assets/2a34e737-e156-4362-99ce-5e89ff0db0ee" />
 
 
 
@@ -220,15 +223,26 @@ https://leetcode.com/problems/last-person-to-fit-in-the-bus/
 >
 > 학습 포인트 : SUM( ) OVER (ORDER BY ...) 로 누적 합계 계산 후 조건 필터링 
 
+~~~sql
+SELECT
+    Q.person_name AS person_name
+FROM (select
+    person_name,
+    turn,
+    sum(weight) over(
+        order by turn) AS tw
+    FROM Queue
+    ) AS Q
+where Q.tw <= 1000
+ORDER BY q.turn DESC
+LIMIT 1
+~~~
+sum() over을 활용하는 것은 떠올렸지만 이를 FROM에서 서브쿼리를 활용하는 부분은 떠올리지 못했다. 고민하다 에러메세지에 대해 부분적으로 GPT를 활용했다.
 
 
 문제를 푸는 다양한 방법이 존재하지만, **윈도우 함수를 사용하여 해결하는 방식에 대해 고민해주시길 바랍니다.** 
 
----
 
-## 문제 인증란
-
-<!-- 이 주석을 지우고 여기에 문제 푼 인증사진을 올려주세요. -->
 
 
 
@@ -248,11 +262,26 @@ FROM Orders;
 
 > **이번에는 예린이에게 "윈도우 함수를 쓰지 않고 동일한 결과를 만들어보라"는 미션을 받았습니다. 예린이는 이 작업을 어떻게 해야할지 막막합니다. 예린이를 도와 ROW_NUMBER() 윈도우 함수 없이 동일한 결과를 서브쿼리나 JOIN을 사용해서 작성해보세요.**
 
-~~~
-여기에 답을 작성해주세요!
+~~~sql
+SELECT 
+  o1.customer_id, 
+  o1.order_id, 
+  o1.order_date,
+  1 + (
+    SELECT COUNT(*)
+    FROM Orders o2
+    WHERE o2.customer_id = o1.customer_id
+      AND (
+        o2.order_date <  o1.order_date
+        OR (o2.order_date = o1.order_date AND o2.order_id < o1.order_id)
+      )
+  ) AS order_rank
+FROM Orders o1
+ORDER BY o1.customer_id, o1.order_date, o1.order_id;
+
 ~~~
 
-
+저도 너무 막막했어요
 
 <br>
 
