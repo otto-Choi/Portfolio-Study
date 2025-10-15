@@ -159,6 +159,9 @@ LIMIT 3;
 
 <!-- 이 주석을 지우고 여기에 문제 푼 인증사진을 올려주세요. -->
 
+<img width="784" height="552" alt="image" src="https://github.com/user-attachments/assets/aa276b51-488c-4325-b690-6d272f9cbe6a" />
+
+<img width="766" height="349" alt="image" src="https://github.com/user-attachments/assets/eacd2bdc-22aa-421a-9e65-74565e38fd21" />
 
 
 ---
