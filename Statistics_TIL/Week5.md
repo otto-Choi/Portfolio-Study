@@ -110,20 +110,7 @@ Week4에 시각화 파트를 끝까지 읽고 수행했던 내용을 그대로 �
 <!-- 이 주석을 지우고 “실습 결과 화면(캡처)을 이곳에 첨부해주세요.-->
 
 
-<img height="240" alt="image" src="https://github.com/user-attachments/assets/b67be53c-af26-45f6-9dbe-6a9170c7a088" />
-<img height="240" alt="image" src="https://github.com/user-attachments/assets/91259998-19de-4f69-88ec-2cf8b3c48c64" />
-<img height="240" alt="image" src="https://github.com/user-attachments/assets/efbcab55-747a-432d-b424-d57950fe0f8f" />
-<img height="240" alt="image" src="https://github.com/user-attachments/assets/5d089813-22ef-4a0b-bfdb-e90add95390c" />
-<img height="240" alt="image" src="https://github.com/user-attachments/assets/0ab82fa3-ff23-4fb0-af82-b1c111063d5d" />
-<img height="240" alt="image" src="https://github.com/user-attachments/assets/76263cc3-5b47-46f4-93e4-c14b1e61fa69" />
-<img height="240" alt="image" src="https://github.com/user-attachments/assets/979299b3-f72b-41cf-b55b-b91323aab410" />
-<img height="240" alt="image" src="https://github.com/user-attachments/assets/c925b643-5d07-4bf1-aa62-49f2a42a8ae7" />
-<img height="240" alt="image" src="https://github.com/user-attachments/assets/4e480467-1df4-4c23-9f79-6b8bdfa69e3a" />
-<img height="240" alt="image" src="https://github.com/user-attachments/assets/174eeb91-18a0-4c68-b964-479e90d1e207" />
-<img height="240" alt="image" src="https://github.com/user-attachments/assets/39e3ea28-ec13-45d7-94d3-6d9929cfaf86" />
-<img height="240" alt="image" src="https://github.com/user-attachments/assets/315c09dd-fb37-4dcd-9482-899d0eabe12f" />
-<img height="240" alt="image" src="https://github.com/user-attachments/assets/23b7c800-db9b-44b1-ab01-18cbf3ab9d77" />
-<img height="240" alt="image" src="https://github.com/user-attachments/assets/8db9b36c-f14f-4262-842a-2f0ca62aa247" />
+
 <img height="240" alt="image" src="https://github.com/user-attachments/assets/2e509b87-e65f-4954-8501-3f6e91b489de" />
 <img height="240" alt="image" src="https://github.com/user-attachments/assets/0a27227e-becb-43ab-909e-c34ded06ecac" />
 <img height="240" alt="image" src="https://github.com/user-attachments/assets/01018170-68eb-4aeb-a5bf-9a68398bc9d3" />
