@@ -227,6 +227,10 @@ ORDER BY sq.AUTHOR_ID, sq.CATEGORY DESC
 ## 문제 인증란
 
 <!-- 이 주석을 지우고 여기에 문제 푼 인증사진을 올려주세요. -->
+<img width="786" height="557" alt="image" src="https://github.com/user-attachments/assets/0c475dd1-8c26-4987-b8b0-0862d7bb33d0" />
+<img width="785" height="559" alt="image" src="https://github.com/user-attachments/assets/86ea2ee0-c23b-4721-be77-486bd50e5537" />
+<img width="742" height="321" alt="image" src="https://github.com/user-attachments/assets/8160732b-7834-4c18-aa3e-65931f9973f8" />
+
 
 
 
