@@ -71,6 +71,33 @@
 
 <!-- 새롭게 배운 내용을 자유롭게 정리해주세요.-->
 
+CTE: Common Table Expreesions
+- FROM 절에서 사용하는 서브쿼리를 위로 빼서 이름을 붙여놓고, 그 이름을 SELECT문에서 테이블처럼 사용하는 방법
+- 선언은 WITH로 시작
+- 서브쿼리에 이름을 붙여 한번 정의하고 이름으로 활용할 수 있다는 장점
+- 즉, 재사용이 가능하다.
+---
+재귀 공통 테이블 표현식(Recursive CTE): 자신의 이름을 참조하는 서브쿼리를 가진 CTE
+
+- CTE식은 일단 WITH절로 시작해야 한다.
+- 자기참조를 이용하는 경우 RECURSIVE를 함께 적어야 한다.
+- 비재귀 SELECT에선 CTE 이름을 참조하지 않는다.
+- 재귀 SELECT에선 CTE 이름을 FROM을 통해 참조한다.
+- 이후 재귀 SELECT에서 더 이상 새 행을 만들지 못하면 종료된다.
+
+---
+재귀 SELECT 내부에서 사용할 수 없는 사항
+- 집계 함수
+- 윈도 함수
+- GROUP BY
+- ORDER BY
+- DISTINCT
+---
+재귀 제한과 안전장치
+- cte_max_recursion_depth 
+- max_execution_time
+
+
 
 
 ## 2. 셀프 조인
@@ -82,7 +109,7 @@
 
 <!-- 새롭게 배운 내용을 자유롭게 정리해주세요.-->
 
-
+같은 테이블 내의 키를 마치 외래키처럼 참조하는 경우 이를 활용하기 위해 셀프 조인을 할 수 있다.
 
 <br>
 
@@ -100,6 +127,17 @@
 >
 > 학습 포인트 : 동일 테이블을 두 번 조인 (왜 동일 테이블을 JOIN 해야하는 문제일까)
 
+~~~sql
+SELECT e.name as Employee
+FROM Employee AS e
+LEFT JOIN Employee m
+    ON e.managerId = m.id
+WHERE e. salary > m.salary
+~~~
+셀프조인을 통해 간단히 작성할 수 있었다.
+
+
+
 - https://leetcode.com/problems/tree-node/description/
 
 > LeetCode 608. Tree Node 
@@ -112,6 +150,46 @@
 > - 어떤 노드가 Inner Node 이려면, 나를 부모로 가지는 노드가 하나 이상 존재하여야 한다.
 >   - 그 외네는 모두 Leaf Node 이다. --> (CASE 문을 사용하는 것을 추천드립니다.)
 
+~~~sql
+WITH RECURSIVE CTE AS (
+ SELECT
+    t.id,
+    t.p_id,
+    0 AS depth
+ FROM Tree t
+ WHERE t.p_id IS NULL
+
+ UNION ALL
+ 
+ SELECT 
+    p.id,
+    p.p_id,
+    c.depth + 1 AS depth
+ FROM Tree p
+ JOIN CTE c
+    ON p.p_id = c.id
+)
+SELECT
+    CTE.id,
+    A.type
+FROM CTE
+LEFT JOIN(
+    SELECT id,
+    CASE
+        WHEN b.depth = 0 THEN 'Root'
+        WHEN EXISTS (SELECT 1 FROM Tree ch WHERE ch.p_id = b.id) THEN 'Inner'
+        ELSE 'Leaf'
+    END AS type
+    FROM CTE b
+) AS A
+ON CTE.id = A.id;
+~~~
+다른 부분은 모두 작성 가능했는데, 
+WHEN EXISTS (SELECT 1 FROM Tree ch WHERE ch.p_id = b.id) THEN 'Inner'
+이부분은 작성에 어려움을 겪었다.
+
+
+
 - https://school.programmers.co.kr/learn/courses/30/lessons/144856
 
 > 프로그래머스 : 저자 별 카테고리 별 매출액 집계하기 
@@ -119,6 +197,30 @@
 > 학습 포인트 : 카테고리와 서브카테고리 계층 구조를 분석하는 로직, SELF JOIN / CTE를 다 활용할 수 있다.
 >
 > - 위에 2가지의 문제를 풀어보고 난 이후, 더 편리한 방법으로 문제를 풀어보세요.
+~~~sql
+SELECT
+    sq.AUTHOR_ID,
+    sq.AUTHOR_NAME,
+    sq.CATEGORY,
+    SUM(sq.t) AS TOTAL_SALES
+FROM (
+    SELECT 
+        b.AUTHOR_ID,
+        A.AUTHOR_NAME,
+        b.CATEGORY,
+        s.SALES * b.PRICE AS t
+    FROM BOOK_SALES AS s
+    LEFT JOIN BOOK AS b
+        ON s.BOOK_ID = b.BOOK_ID
+    LEFT JOIN AUTHOR AS a
+        ON b.AUTHOR_ID = a.AUTHOR_ID   
+    WHERE s.SALES_DATE >= DATE '2022-01-01'
+        AND s.SALES_DATE <  DATE '2022-02-01'
+) as sq
+GROUP BY sq.AUTHOR_ID, sq.CATEGORY
+ORDER BY sq.AUTHOR_ID, sq.CATEGORY DESC
+~~~
+서브쿼리를 활용했다.
 
 ---
 
@@ -147,7 +249,33 @@ LEFT JOIN Employees e2 ON e1.manager_id = e2.id;
 
 
 ~~~
-여기에 답을 작성해주세요.
+WITH RECURSIVE CTE AS (
+    SELECT  
+        e.id,
+        e.name,
+        e.manager_id,
+        0 AS depth
+    FROM Employees AS e
+    WHERE e.manager_id IS NULL
+
+    UNION ALL
+
+    SELECT
+        f.id,
+        f.name,
+        f.manager_id
+        c.depth + 1 AS depth
+    FROM Employees AS f
+    JOIN CTE AS c
+        ON f.manager_id=c.id
+)
+SELECT
+    id,
+    name,
+    manager_id,
+    depth
+FROM org
+ORDER BY depth DESC, id;
 ~~~
 
 
