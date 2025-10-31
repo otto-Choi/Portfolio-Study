@@ -178,7 +178,7 @@ microsecond(us): 1/1,000 ms
 
 # 2️⃣ 확인문제 & 문제 인증
 
-<img width="397" height="517" alt="image" src="https://github.com/user-attachments/assets/780caae8-d92a-41d0-9ba6-f8967a2d51c9" />
+<img width="395" height="319" alt="image" src="https://github.com/user-attachments/assets/4ee1f413-3dd9-4394-bd19-a1982f123ae6" />
 
 
 
