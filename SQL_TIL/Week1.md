@@ -146,7 +146,7 @@ cf. ERD가 없는 경우
 ---
 # 2️⃣ 학습 인증란
 <!-- 이 글을 지우고, 여기에 학습한 것을 인증해주세요.-->
-<img width="403" height="620" alt="Week1" src="https://github.com/user-attachments/assets/2ea63751-1b3e-42dd-b231-aa59143354ea" />
+<img width="399" height="407" alt="image" src="https://github.com/user-attachments/assets/c57a751c-6430-401d-a1da-a0c0686ab5b7" />
 
 
 <br>
@@ -198,7 +198,6 @@ cf. ERD가 없는 경우
 - 평점
 - 리뷰 내용
 
-<img width="644" height="427" alt="관계" src="https://github.com/user-attachments/assets/3fe462c4-0471-4b7f-824e-0e66c819e20b" />
 
 
 
