@@ -363,6 +363,7 @@ FROM basic.battle;
 
 # 학습 인증란
 <!-- 이 글을 지우고, 여기에 학습한 것을 인증해주세요.-->
+<img width="408" height="616" alt="image" src="https://github.com/user-attachments/assets/923e15c5-fb53-4ab5-84de-3f319f866f94" />
 
 
 <br>
