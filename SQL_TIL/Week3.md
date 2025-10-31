@@ -1,4 +1,4 @@
-# SQL_BASIC 3주차 정규 과제 
+<img width="380" height="344" alt="image" src="https://github.com/user-attachments/assets/4be887f7-6652-4f36-84fd-eac53b7e4f3a" /># SQL_BASIC 3주차 정규 과제 
 
 📌SQL_BASIC 정규과제는 매주 정해진 분량의 `초보자를 위한 BigQuery(SQL) 입문` 강의를 듣고 간단한 문제를 풀면서 학습하는 것입니다. 이번주는 아래의 **SQL_Basic_3rd_TIL**에 나열된 분량을 수강하고 `학습 목표`에 맞게 공부하시면 됩니다.
 
@@ -532,8 +532,11 @@ WHERE
 # 2️⃣ 학습 인증란
 
 <!-- 이 글을 지우고, 여기에 학습한 것을 인증해주세요.-->
+<img width="393" height="596" alt="image" src="https://github.com/user-attachments/assets/4d0f3ba5-41fe-43f9-bce7-32a279cdd881" />
+<img width="380" height="344" alt="image" src="https://github.com/user-attachments/assets/d5076487-d5b3-44ca-b62e-b22bf4bf17bb" />
 
-<img width="396" height="883" alt="image" src="https://github.com/user-attachments/assets/77df7f14-b148-4b44-a0ea-91931f5848ff" />
+
+
 
 
 <br><br>
