@@ -121,7 +121,8 @@ LEFT JOIN USED_GOODS_REPLY r<br>
 ON b.BOARD_ID = r.BOARD_ID<br>
 로도 구현 가능하다.
 <img width="729" height="326" alt="image" src="https://github.com/user-attachments/assets/80885d23-b3f0-4cf4-806f-76c3ea599460" />
----
+
+
 https://school.programmers.co.kr/learn/courses/30/lessons/144854
 
 > 조건에 맞는 도서와 저자 리스트 출력하기 (JOIN)
