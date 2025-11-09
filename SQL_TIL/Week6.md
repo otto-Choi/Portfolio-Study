@@ -120,7 +120,8 @@ FROM USED_GOODS_BOARD b<br>
 LEFT JOIN USED_GOODS_REPLY r<br>
 ON b.BOARD_ID = r.BOARD_ID<br>
 로도 구현 가능하다.
-
+<img width="729" height="326" alt="image" src="https://github.com/user-attachments/assets/80885d23-b3f0-4cf4-806f-76c3ea599460" />
+---
 https://school.programmers.co.kr/learn/courses/30/lessons/144854
 
 > 조건에 맞는 도서와 저자 리스트 출력하기 (JOIN)
@@ -132,6 +133,9 @@ LEFT JOIN AUTHOR a
 WHERE b.CATEGORY = '경제'
 ORDER BY b.PUBLISHED_DATE
 ~~~
+
+<img width="719" height="320" alt="image" src="https://github.com/user-attachments/assets/79b09e31-715e-4e26-a97b-cb6f0366102a" />
+
 <!-- 정답을 맞추게 되면, 정답입니다. 이 부분을 캡처해서 이 주석을 지우시고 첨부해주시면 됩니다. --> 
 
 
