@@ -108,10 +108,30 @@ https://school.programmers.co.kr/learn/courses/30/lessons/164673
 
 > 조건에 부합하는 중고거래 댓글 조회하기 (JOIN)
 
+~~~sql
+SELECT b.TITLE, r.BOARD_ID, r.REPLY_ID, r.WRITER_ID, r.CONTENTS, DATE_FORMAT(r.CREATED_DATE, '%Y-%m-%d') AS CREATED_DATE
+FROM USED_GOODS_BOARD b, USED_GOODS_REPLY r
+WHERE b.BOARD_ID = r.BOARD_ID
+AND b.CREATED_DATE BETWEEN '2022-10-01' AND '2022-10-31'
+ORDER BY r.CREATED_DATE, b.TITLE
+~~~
+JOIN을 ON이 아닌 WHERE을 통해 수행했다.<br>
+FROM USED_GOODS_BOARD b<br>
+LEFT JOIN USED_GOODS_REPLY r<br>
+ON b.BOARD_ID = r.BOARD_ID<br>
+로도 구현 가능하다.
+
 https://school.programmers.co.kr/learn/courses/30/lessons/144854
 
 > 조건에 맞는 도서와 저자 리스트 출력하기 (JOIN)
-
+~~~sql
+SELECT b.BOOK_ID, a.AUTHOR_NAME, DATE_FORMAT(b.PUBLISHED_DATE, '%Y-%m-%d') AS PUBLISHED_DATE
+FROM BOOK b
+LEFT JOIN AUTHOR a
+    ON b.AUTHOR_ID = a.AUTHOR_ID
+WHERE b.CATEGORY = '경제'
+ORDER BY b.PUBLISHED_DATE
+~~~
 <!-- 정답을 맞추게 되면, 정답입니다. 이 부분을 캡처해서 이 주석을 지우시고 첨부해주시면 됩니다. --> 
 
 
