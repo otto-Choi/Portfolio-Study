@@ -55,6 +55,16 @@
 * JOIN에 대한 정의와 필요성에 대해 설명할 수 있다.
 ~~~
 
+JOIN: 서로 다른 데이터 테이블을 연결하는 것
+
+JOIN의 필요성
+- 관계형 데이터베이스(RDBMS) 설계시 정규화 과정을 거침
+    - 정규화는 중복을 최소화하게 데이터를 구조화
+    - User Table은 유저 데이터만, Order Table은 주문 데이터만
+    - 따라서 데이터를 다양한 Table에 저장해서 필요할 때 JOIN 사용
+- 데이터는 개발 관점에서 분리되어 있는 것이 낫다.
+
+
 <!-- 새롭게 배운 내용을 자유롭게 정리해주세요.-->
 
 
@@ -66,6 +76,17 @@
 * JOIN 방법들의 종류를 설명할 수 있다. 
 * 각 JOIN 방법들의 차이점에 대해서 설명할 수 있다. 
 ~~~
+
+- (INNER) JOIN
+    - 두 테이블의 공통 요소만 연결
+- LEFT/RIGHT (OUTER) JOIN
+    - 왼쪽/오른쪽 테이블을 기준으로 연결
+- FULL (OUTER) JOIN
+    - 양쪽 모두를 연결
+- CROSS JOIN
+    - 두 테이블의 각각의 요소에 대해 모든 조합
+
+
 
 <!-- 새롭게 배운 내용을 자유롭게 정리해주세요.-->
 
@@ -79,6 +100,25 @@
 * JOIN 을 활용한 쿼리를 작성할 수 있다. 
 ~~~
 
+SQL JOIN 쿼리 작성 흐름
+
+1.  테이블 확인
+    - 테이블에 저장된 데이터, 컬럼 확인
+2. 기준 테이블 정의
+    - 가장 많이 참고할 기준 테이블 정의
+3. JOIN Key 찾기
+    - 여러 Table과 연결할 Key 정리
+4. 결과 예상하기
+    - 결과 테이블을 예상해서 손, 엑셀로 작성
+5. 쿼리 작성/검증
+    - 예상한 결과와 동일한 결과가 나오는지 확인
+
+JOIN이라는 구문을 이용하는 경우, CROSS JOIN을 제외한 모든 조인에서 ON이 필수적이다.
+
+다만, FROM 과 WHERE을 함께 이용하는 경우 ON이 필요하지 않다.
+
+
+
 <!-- 새롭게 배운 내용을 자유롭게 정리해주세요.-->
 
 
@@ -90,7 +130,104 @@
 * 연습문제(3문제 이상) 푼 것들 정리하기
 ~~~
 
+1번. 트레이너가 보유한 포켓몬들이 얼마나 있는지 알 수 있는 쿼리를 작성해 주세요.
+
+답안
+~~~sql
+SELECT p.kor_name AS pokemon_name, COUNT(*) AS pokemon_cnt
+FROM basic.trainer_pokemon tp
+LEFT JOIN basic.pokemon p
+  ON tp.pokemon_id = p.id
+WHERE tp.status IN ('Active', 'Training')
+GROUP BY p.kor_name;
+~~~
+
+정답과 동일한 결과를 가져온다. 다만, 문제에서 제시되지 않은 정렬을 포함할 경우 동일하다.
+
+---
+
+2번. 각 트레이너가 가진 포켓몬 중에서 'Grass' 타입의 포켓몬 수를 계산해주세요. (단, 편의를 위해 type1 기준으로 계산해주세요.)
+
+답안
+~~~sql
+SELECT t.name, COUNT(*) cnt
+FROM
+  basic.trainer_pokemon tp,
+  basic.pokemon p,
+  basic.trainer t
+WHERE tp.pokemon_id = p.id
+  AND tp.trainer_id = t.id
+  AND p.type1 = 'Grass'
+GROUP BY t.name;
+~~~
+
+FROM과 WHERE을 이용한 조인으로 풀이해 봤다. '가진'이라는 조건이 붙었기에 Active, Traing으로 조건을 걸어야 했다.
+
+---
+
+3번. 트레이너의 고향(hometown)과 포켓몬을 포획한 위치(location)를 비교하여, 자신의 고향에서 포켓몬을 포획한 트레이너의 수를 계산해주세요.
+
+답안
+~~~sql
+SELECT COUNT(*)
+FROM basic.trainer_pokemon tp
+LEFT JOIN basic.trainer t
+  ON tp.trainer_id = t.id
+WHERE tp.location = t.hometown;
+~~~
+
+고향과 위치가 같았던 횟수가 아닌, 트레이너의 수를 찾아야 하므로 DISCTINCT가 필요했다.
+
+SELECT 문을 SELECT COUNT(distinct tp.trainer_id)으로 수정하여 정답을 도출했다.
+
+---
+
+4번. Master 등급인 트레이너들은 어떤 타입의 포켓몬을 제일 많이 보유하고 있을까요?
+
+답안
+~~~sql
+SELECT p.type1
+FROM basic.trainer t,
+  basic.pokemon p,
+  basic.trainer_pokemon tp
+WHERE
+  tp.trainer_id = t.id
+  AND tp.pokemon_id = p.id
+  AND t.achievement_level = 'Master'
+  AND tp.status IN ('Active', 'Training')
+GROUP BY p.type1
+ORDER BY COUNT(*) DESC
+LIMIT 1;
+~~~
+
+WHERE으로 조인했다.
+
+---
+
+5번. Incheon 출신 트레이너들은 1세대, 2세대 포켓몬을 각각 얼마나 보유하고 있나요?
+
+답안
+~~~sql
+SELECT t.name,
+  SUM(CASE WHEN p.generation = 1 THEN 1 ELSE 0 END) AS gen1_cnt,
+  SUM(CASE WHEN p.generation = 2 THEN 1 ELSE 0 END) AS gen2_cnt
+FROM basic.trainer t,
+  basic.pokemon p,
+  basic.trainer_pokemon tp
+WHERE
+  tp.trainer_id = t.id
+  AND tp.pokemon_id = p.id
+  AND t.hometown = 'Incheon'
+  AND tp.status IN ('Active', 'Training')
+  AND p.generation IN (1, 2)
+GROUP BY t.name
+~~~
+WHERE으로 join했으며, SUM, CASE문을 이용해 각 트레이너별로 1세대, 2세대 포켓몬 보유 수를 확인했다.
+정답에선 각 세대별로 총 개수를 구했다.
+
+
 <!-- 새롭게 배운 내용을 자유롭게 정리해주세요.-->
+
 
 
 
