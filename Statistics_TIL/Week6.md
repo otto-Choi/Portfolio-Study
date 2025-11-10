@@ -143,6 +143,22 @@ WOE(Weight of Evidence), IV(Information Value)
 
 <!-- 이 주석을 지우고 “실습 결과 화면(캡처)을 이곳에 첨부해주세요.-->
 
+<img height="240" alt="image" src="https://github.com/user-attachments/assets/2211b5b0-f7e1-46e0-8a2c-4c87bc8d2317" />
+<img height="240" alt="image" src="https://github.com/user-attachments/assets/b1d5d8c6-cac3-4cb2-9329-c98d7d54abf4" />
+<img height="240" alt="image" src="https://github.com/user-attachments/assets/c40b9956-c6e3-4526-b4ac-30187b58a6ac" />
+<img height="240" alt="image" src="https://github.com/user-attachments/assets/34b0c1b7-919e-43e4-8b3f-8a0d86ae17e6" />
+<img height="240" alt="image" src="https://github.com/user-attachments/assets/d898fd4c-f6e3-4aa2-b782-9d5b11faeac9" />
+<img height="240" alt="image" src="https://github.com/user-attachments/assets/1ce149da-8708-4294-8a81-fb783003df8e" />
+<img height="240" alt="image" src="https://github.com/user-attachments/assets/a82eb4e8-a277-458e-8ba5-c25ffe91f5db" />
+<img height="240" alt="image" src="https://github.com/user-attachments/assets/579a339c-46e8-45d9-a0de-7ff45d9fbb87" />
+<img height="240" alt="image" src="https://github.com/user-attachments/assets/2ac55070-f968-4c4d-9223-a7ac2e8af052" />
+<img height="240" alt="image" src="https://github.com/user-attachments/assets/12fd6e81-c979-45db-a635-afae880bfbb5" />
+<img height="240" alt="image" src="https://github.com/user-attachments/assets/3b4f146f-5af1-4aaf-9eb5-56b2efebcfda" />
+
+
+
+
+
 ~~~
 인증 이미지가 없으면 과제 수행으로 인정되지 않습니다.
 ~~~
