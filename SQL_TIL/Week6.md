@@ -230,6 +230,7 @@ WHERE으로 join했으며, SUM, CASE문을 이용해 각 트레이너별로 1세
 
 
 
+<img width="399" height="713" alt="image" src="https://github.com/user-attachments/assets/e7d3d282-975c-4b8e-a8cb-ff7ebbedf870" />
 
 <br>
 
@@ -257,6 +258,7 @@ FROM USED_GOODS_BOARD b<br>
 LEFT JOIN USED_GOODS_REPLY r<br>
 ON b.BOARD_ID = r.BOARD_ID<br>
 로도 구현 가능하다.
+
 <img width="729" height="326" alt="image" src="https://github.com/user-attachments/assets/80885d23-b3f0-4cf4-806f-76c3ea599460" />
 
 
