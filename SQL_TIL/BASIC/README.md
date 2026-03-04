@@ -1,4 +1,4 @@
-# SQL_TIL
+# SQL_TIL/BASIC
 
 이 디렉토리는 **학회 정규과제 SQL (Basic / Advanced / Master)** 중  
 **Basic 트랙**의 주간 학습 기록을 정리한 공간입니다.  
