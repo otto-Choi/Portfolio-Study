@@ -9,17 +9,11 @@
 
 ### 개인 학습 기록 (TIL: Today I Learned)
 - **[SQL_TIL](./SQL_TIL/)**  
-  학회 커리큘럼 기반 SQL 주간 학습 기록  
+  학회 커리큘럼 기반 SQL 주간 학습 기록 및 팀 단위로 진행한 SQL 학습 활동 및 주간 기록  
 - **[Statistics_TIL](./Statistics_TIL/)**  
   학회 커리큘럼 기반 통계 기초 및 실습 주간 학습 기록  
-- **[Data_Literacy_TIL](./Data_Literacy_TIL/)**  
-  학회 커리큘럼 기반 데이터 리터러시(데이터 이해와 활용 능력) 주간 학습 기록  
-
----
-
-### 팀 학습 기록 (Study)
-- **[SQL_Study](./SQL_Study/)**  
-  팀 단위로 진행한 SQL 학습 활동 및 주간 기록  
+- **[Python_TIL](./Python_TIL/)**  
+  학회 커리큘럼 기반 파이썬 주간 학습 기록  
 
 ---
 
