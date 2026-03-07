@@ -54,6 +54,9 @@
 <!--  Python 실행 및 가상환경 관리가 가능한 환경(예: venv 등)이 이미 구축되어 있다면 해당 환경을 사용하셔도 괜찮습니다. 
 이 경우 해당 환경의 시작 화면을 캡쳐해주세요.-->
 
+<img width="623" height="436" alt="image" src="https://github.com/user-attachments/assets/04537688-7d62-4dcd-a74c-d96b57482189" />
+
+<img width="979" height="512" alt="image" src="https://github.com/user-attachments/assets/fcf41e3f-f6a7-4dce-b8ba-81d345220e2c" />
 
 
 ## 2. 파이썬 인터프리터 
@@ -66,6 +69,8 @@
 ```
 
 <!-- 이 부분을 지우고 실행 화면을 제출해주세요. -->
+
+<img width="979" height="213" alt="image" src="https://github.com/user-attachments/assets/f5826d2f-b69d-43c2-91c1-b054a4c1e310" />
 
 
 ## 3. IPython 기초  
@@ -85,6 +90,8 @@ data
 
 <!-- 이 부분을 지우고 실행 화면을 제출해주세요. -->
 
+<img width="979" height="444" alt="image" src="https://github.com/user-attachments/assets/731f5532-42f1-451c-b56a-d32d4f81a85e" />
+
 ### 주피터 노트북 실행하기 
 
 ```
@@ -94,10 +101,14 @@ data
 
 <!-- 이 부분을 지우고 실행 화면을 제출해주세요. -->
 
+<img width="511" height="205" alt="image" src="https://github.com/user-attachments/assets/b778766b-baa7-4fe1-8da0-ba064f21e2d7" />
+
 
 ## 파이썬 기초  
 
 <!-- 이 부분을 지우고 파이썬 기초에 대해 새롭게 배우게 된 내용을 정리해주세요. -->
+
+**라이브러리별 기능**
 
 
 ---
@@ -114,6 +125,9 @@ print("".join(chr(x ^ key) for x in data))
 ```
 
 <!-- 이 부분을 지우고 인증 사진을 제출해주세요.-->
+
+<img width="403" height="118" alt="image" src="https://github.com/user-attachments/assets/206973e9-72ed-47e4-b9b5-11b2f95b8aee" />
+
 
 ### 🎉 수고하셨습니다.
 
