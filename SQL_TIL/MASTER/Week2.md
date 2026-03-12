@@ -48,9 +48,19 @@
 ### 1-1 코드 값을 레이블로 변경하기
 
 <!-- 이 부분을 지우고 새롭게 배운 내용을 자유롭게 정리해주세요. -->
+너무 오랜만에 쿼리를 작성해서 어떻게 해야 하나 싶었는데, 조금씩 떠오름.<br>
+CASE문엔 WHEN과 THEN, END 및 AS를 사용함.
 
 ```sql
-여기에 코드를 적어주세요.
+SELECT
+    user_id,
+    CASE 
+        WHEN register_device =1 THEN '데스크톱'
+        WHEN register_device =2 THEN '스마트폰'
+        WHEN register_device =3 THEN '애플리케이션'
+        -- ELSE  ''
+    END AS device_name
+FROM mst_users;
 ```
 
 <!-- 이 부분을 지우고 실행 결과 화면을 제출해주세요. -->
@@ -59,8 +69,26 @@
 
 <!-- 이 부분을 지우고 새롭게 배운 내용을 자유롭게 정리해주세요. -->
 
+이 부분에서 MYSQL과 PostgreSQL의 차이를 느끼고 PostgreSQL 환경을 다시 설정했다.
+
+'https?://([^/]*)' 이 부분을 이해할 수 없어 추가적으로 찾아봤다.
+
+|부분|의미|
+|---|---|
+|http|문자 그대로|
+|s?|s키의 유무 관계 없이 매칭|
+|://|:// 그대로|
+|( )|괄호 안의 내용을 추출함|
+|[^/]|'/'가 아닌 모든 문자 추출|
+|*|앞 문자가 0개 이상(없어도 됨)|
+|+|앞 문자가 1개 이상(최소 1개)|
+|substring|문자열의 일부 추출<br>from 사용시 정규식으로 추출하는 것임|
+
 ```sql
-여기에 코드를 적어주세요.
+SELECT
+    stamp,
+    substring(referrer from 'https?://([^/]*)') AS referrer_host
+FROM access_log;
 ```
 
 <!-- 이 부분을 지우고 실행 결과 화면을 제출해주세요. -->
@@ -70,7 +98,12 @@
 <!-- 이 부분을 지우고 새롭게 배운 내용을 자유롭게 정리해주세요. -->
 
 ```sql
-여기에 코드를 적어주세요.
+SELECT
+    stamp,
+    url,
+    substring(url from '//[^/]+([^?#]+)') AS path,
+    substring(url from 'id=([^&]*)') AS id
+FROM access_log;
 ```
 
 <!-- 이 부분을 지우고 실행 결과 화면을 제출해주세요. -->
@@ -79,8 +112,22 @@
 
 <!-- 이 부분을 지우고 새롭게 배운 내용을 자유롭게 정리해주세요. -->
 
+만약 타임존을 적용하고 싶지 않은 경우 LOCALTIMESTAMP를 사용해야 함.
+
+current_timestamp의 값을 텍스트로 가져오려면 ::TEXT를 붙여야 함.
+
 ```sql
-여기에 코드를 적어주세요.
+SELECT
+    CURRENT_DATE as dt,
+    stamp,
+    substring(stamp, 1, 4) as year,
+    substring(stamp, 6, 2) as month,
+    substring(stamp, 9, 2) as day,
+    substring(stamp, 12, 2) as hour,
+    substring(stamp, 15, 2) as minute,
+    substring(stamp, 18, 2) as second,
+    substring(stamp, 1, 7) as year_month
+FROM (SELECT current_timestamp::TEXT AS stamp) AS subquery;
 ```
 
 <!-- 이 부분을 지우고 실행 결과 화면을 제출해주세요. -->
@@ -89,8 +136,16 @@
 
 <!-- 이 부분을 지우고 새롭게 배운 내용을 자유롭게 정리해주세요. -->
 
+COALESCE를 사용하여 NULL값을 특정 값으로 대치할 수 있다.
+
 ```sql
-여기에 코드를 적어주세요.
+SELECT
+    purchase_id,
+    amount,
+    coupon,
+    amount - coupon AS discounted_amount1,
+    amount - COALESCE(coupon, 0) AS discounted_amount2
+FROM purchase_log_with_coupon;
 ```
 
 <!-- 이 부분을 지우고 실행 결과 화면을 제출해주세요. -->
@@ -102,8 +157,13 @@
 
 <!-- 이 부분을 지우고 새롭게 배운 내용을 자유롭게 정리해주세요. -->
 
+띄어쓰기를 위해 중간에 ' ',를 추가함
+
 ```sql
-여기에 코드를 적어주세요.
+SELECT
+    user_id,
+    concat(pref_name,' ',city_name) AS pref_city
+FROM mst_user_location;
 ```
 
 <!-- 이 부분을 지우고 실행 결과 화면을 제출해주세요. -->
@@ -112,8 +172,40 @@
 
 <!-- 이 부분을 지우고 새롭게 배운 내용을 자유롭게 정리해주세요. -->
 
+SIGN: 양수인지 음수인지 여부를 알려 줌.
+
 ```sql
-여기에 코드를 적어주세요.
+SELECT
+    year,
+    q1,
+    q2,
+    CASE 
+        WHEN q1<q2 THEN '+'
+        WHEN q1=q2 THEN ' ' 
+        ELSE '-'
+    END AS judge_q1_q2,
+    q2-q1 AS diff_q2_q1,
+    SIGN(q2-q1) AS sign_q2_q1
+FROM quarterly_sales
+ORDER BY year;
+
+SELECT
+    year,
+    (q1+q2+q3+q4)/4 AS avg
+FROM quarterly_sales
+ORDER BY year;
+
+SELECT
+    year,
+    (COALESCE(q1,0)+COALESCE(q2,0)+COALESCE(q3,0)+COALESCE(q4,0))/4 AS average
+FROM quarterly_sales
+ORDER BY year;
+
+SELECT
+    year,
+    (COALESCE(q1,0)+COALESCE(q2,0)+COALESCE(q3,0)+COALESCE(q4,0))/(sign(COALESCE(q1,0))+sign(COALESCE(q2,0))+sign(COALESCE(q3,0))+sign(COALESCE(q4,0))) AS average
+FROM quarterly_sales
+ORDER BY year;
 ```
 
 <!-- 이 부분을 지우고 실행 결과 화면을 제출해주세요. -->
@@ -122,8 +214,30 @@
 
 <!-- 이 부분을 지우고 새롭게 배운 내용을 자유롭게 정리해주세요. -->
 
+clicks와 impressions가 모두 정수형 타입이라 정수 나눗셈이 되어 소수점이 버려짐.<br>
+따라서 100을 곱해서 계산하거나, clicks::numeric으로 변환하는 과정을 거쳐야 함.<br>
+별도의 양식 지정을 안했더니 ctr_as_percentage 컬럼이 지나치게 긴 소수점까지 표시하게 되어 round를 적용함.
+
+
 ```sql
-여기에 코드를 적어주세요.
+SELECT
+    dt,
+    ad_id,
+    round(clicks / impressions,2) as ctr,
+    round(100.0*clicks / impressions,2) as ctr_as_percentage
+FROM advertising_stats
+WHERE dt = '2017-04-01'
+ORDER BY dt, ad_id;
+
+SELECT
+    dt,
+    ad_id,
+    CASE
+        WHEN impressions > 0 THEN 100.0 * clicks / impressions
+    END AS ctr_as_percent_by_case,
+    100.0 * clicks / NULLIF(impressions, 0) AS ctr_as_percent_by_null
+FROM advertising_stats
+ORDER BY dt, ad_id;
 ```
 
 <!-- 이 부분을 지우고 실행 결과 화면을 제출해주세요. -->
@@ -133,7 +247,14 @@
 <!-- 이 부분을 지우고 새롭게 배운 내용을 자유롭게 정리해주세요. -->
 
 ```sql
-여기에 코드를 적어주세요.
+SELECT
+    abs(x1-x2) AS abs,
+    sqrt(power(x1-x2, 2)) AS rms
+FROM location_1d;
+
+SELECT
+    SQRT(POWER(x1-x2, 2) + POWER(y1-y2, 2)) AS dist
+FROM location_2d
 ```
 
 <!-- 이 부분을 지우고 실행 결과 화면을 제출해주세요. -->
@@ -142,8 +263,53 @@
 
 <!-- 이 부분을 지우고 새롭게 배운 내용을 자유롭게 정리해주세요. -->
 
+위와 마찬가지로, ::뒤에 어떤 형태의 데이터타입인지 지정할 수 있음.
+
+문자열로 변환하여 계산하더라도 당연히 같은 결과를 얻을 수 있음.<br>
+익숙해지기 전까지는 문자열으로 변환하여 계산하는 것이 실수의 여지를 줄일 수 있다는 것에 이해할 수 있었음.
+
 ```sql
-여기에 코드를 적어주세요.
+SELECT
+    user_id,
+    register_stamp::timestamp AS register_stamp,
+    register_stamp::timestamp + '1 hour'::interval AS after_1_hour,
+    register_stamp::timestamp - '30 minutes'::interval AS before_30_minutes,
+    register_stamp::date AS register_date,
+    (register_stamp::date + '1 day'::interval)::date AS after_1_day,
+    (register_stamp::date - '1 month'::interval)::date AS before_1_month
+FROM mst_users_with_dates;
+
+SELECT
+    user_id,
+    CURRENT_DATE AS today,
+    register_stamp::date AS register_date,
+    CURRENT_DATE - register_stamp::date AS diff_days
+FROM mst_users_with_dates;
+
+SELECT
+    user_id,
+    CURRENT_DATE AS today,
+    register_stamp::date AS register_date,
+    birth_date::date AS birth_date,
+    EXTRACT(YEAR FROM age(birth_date::date)) AS current_age,
+    EXTRACT(YEAR FROM age(register_stamp::date, birth_date::date)) AS register_age
+FROM mst_users_with_dates;
+
+SELECT
+    user_id,
+    substring(register_stamp, 1, 10) AS register_date,
+    birth_date,
+    floor(
+        (CAST(replace(substring(register_stamp, 1, 10), '-', '') AS integer)
+        - CAST(replace(birth_date, '-', '') AS integer))
+        / 10000
+    ) AS register_age,
+    floor(
+        (CAST(replace(CAST(CURRENT_DATE AS text), '-', '') AS integer)
+        - CAST(replace(birth_date, '-', '') AS integer))
+        / 10000
+    ) AS current_age
+FROM mst_users_with_dates;
 ```
 
 <!-- 이 부분을 지우고 실행 결과 화면을 제출해주세요. -->
@@ -152,8 +318,42 @@
 
 <!-- 이 부분을 지우고 새롭게 배운 내용을 자유롭게 정리해주세요. -->
 
+IP주소 숫자의 의미...를 자격증 준비하며 공부했었는데, 거의 다 잊었다...
+
 ```sql
-여기에 코드를 적어주세요.
+SELECT
+    CAST('127.0.0.1' AS INET) < CAST('127.0.0.2' AS INET) AS lt,
+    CAST('127.0.0.1' AS INET) > CAST('127.0.0.2' AS INET) AS gt;
+
+SELECT
+    CAST('127.0.0.1' AS INET) << CAST('127.0.0.0/8' AS INET) AS is_contained;
+
+SELECT
+    ip,
+    CAST(split_part(ip, '.', 1) AS integer) AS ip_part_1,
+    CAST(split_part(ip, '.', 2) AS integer) AS ip_part_2,
+    CAST(split_part(ip, '.', 3) AS integer) AS ip_part_3,
+    CAST(split_part(ip, '.', 4) AS integer) AS ip_part_4
+FROM (SELECT CAST('192.168.0.1' AS text) AS ip) AS t;
+
+SELECT
+    ip,
+    CAST(split_part(ip, '.', 1) AS integer) * 2^24
+    + CAST(split_part(ip, '.', 2) AS integer) * 2^16
+    + CAST(split_part(ip, '.', 3) AS integer) * 2^8
+    + CAST(split_part(ip, '.', 4) AS integer) * 2^0
+    AS ip_integer
+FROM (SELECT CAST('192.168.0.1' AS text) AS ip) AS t;
+
+SELECT
+    ip,
+    lpad(split_part(ip, '.', 1), 3, '0')
+    || lpad(split_part(ip, '.', 2), 3, '0')
+    || lpad(split_part(ip, '.', 3), 3, '0')
+    || lpad(split_part(ip, '.', 4), 3, '0')
+    AS ip_padding
+FROM
+    (SELECT CAST('192.168.0.1' AS text) AS ip) AS t;
 ```
 
 <!-- 이 부분을 지우고 실행 결과 화면을 제출해주세요. -->
