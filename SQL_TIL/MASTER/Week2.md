@@ -65,6 +65,9 @@ FROM mst_users;
 
 <!-- 이 부분을 지우고 실행 결과 화면을 제출해주세요. -->
 
+<img width="349" height="141" alt="image" src="https://github.com/user-attachments/assets/74efeb33-d4a6-41ea-a4c3-233484b369cb" />
+
+
 ### 1-2 URL에서 요소 추출하기
 
 <!-- 이 부분을 지우고 새롭게 배운 내용을 자유롭게 정리해주세요. -->
@@ -93,6 +96,8 @@ FROM access_log;
 
 <!-- 이 부분을 지우고 실행 결과 화면을 제출해주세요. -->
 
+<img width="362" height="134" alt="image" src="https://github.com/user-attachments/assets/76c37468-ded3-468c-a6d7-1afcd1995ac9" />
+
 ### 1-3 문자열을 배열로 분해하기
 
 <!-- 이 부분을 지우고 새롭게 배운 내용을 자유롭게 정리해주세요. -->
@@ -107,6 +112,10 @@ FROM access_log;
 ```
 
 <!-- 이 부분을 지우고 실행 결과 화면을 제출해주세요. -->
+
+<img width="593" height="139" alt="image" src="https://github.com/user-attachments/assets/2fc131b3-146f-4adb-8c35-fc8305f60b7e" />
+
+<img width="583" height="138" alt="image" src="https://github.com/user-attachments/assets/2d4e61d4-691a-4703-9e41-1dd510cbbc5a" />
 
 ### 1-4 날짜와 타임스탬프 다루기
 
@@ -132,6 +141,9 @@ FROM (SELECT current_timestamp::TEXT AS stamp) AS subquery;
 
 <!-- 이 부분을 지우고 실행 결과 화면을 제출해주세요. -->
 
+<img width="1087" height="70" alt="image" src="https://github.com/user-attachments/assets/e7d1d5ac-e52e-418d-a730-dbf73e292917" />
+
+
 ### 1-5 결손 값을 디폴트 값으로 대치하기
 
 <!-- 이 부분을 지우고 새롭게 배운 내용을 자유롭게 정리해주세요. -->
@@ -150,6 +162,8 @@ FROM purchase_log_with_coupon;
 
 <!-- 이 부분을 지우고 실행 결과 화면을 제출해주세요. -->
 
+<img width="774" height="144" alt="image" src="https://github.com/user-attachments/assets/8d5f5a2e-2c7a-4f74-9b25-f8df501626ef" />
+
 
 ## 2. 여러 개의 값에 대한 조작 
 
@@ -167,6 +181,9 @@ FROM mst_user_location;
 ```
 
 <!-- 이 부분을 지우고 실행 결과 화면을 제출해주세요. -->
+
+<img width="402" height="134" alt="image" src="https://github.com/user-attachments/assets/4df54ae0-757c-4073-aab9-31c762d07ddb" />
+
 
 ### 2-2 여러 개의 값을 비교하기
 
@@ -210,6 +227,14 @@ ORDER BY year;
 
 <!-- 이 부분을 지우고 실행 결과 화면을 제출해주세요. -->
 
+<img width="764" height="134" alt="image" src="https://github.com/user-attachments/assets/41b11706-6f2b-42ec-94ce-bfbd7d7e70ad" />
+
+<img width="312" height="139" alt="image" src="https://github.com/user-attachments/assets/d91f4986-999a-4fe8-8a34-bd3f69561963" />
+
+<img width="295" height="142" alt="image" src="https://github.com/user-attachments/assets/5ce6002e-5744-4286-b64c-ca8777374d6e" />
+
+<img width="292" height="132" alt="image" src="https://github.com/user-attachments/assets/df6ca54a-7c02-4be2-b047-d01d8d99986f" />
+
 ### 2-3 2개의 값 비율 계산하기
 
 <!-- 이 부분을 지우고 새롭게 배운 내용을 자유롭게 정리해주세요. -->
@@ -242,6 +267,12 @@ ORDER BY dt, ad_id;
 
 <!-- 이 부분을 지우고 실행 결과 화면을 제출해주세요. -->
 
+<img width="600" height="134" alt="image" src="https://github.com/user-attachments/assets/d1694210-3ef0-4419-be44-f3e5d87cdfaf" />
+
+<img width="594" height="136" alt="image" src="https://github.com/user-attachments/assets/ecb4a2b6-bd41-4557-bad1-100b39faffb8" />
+
+<img width="638" height="235" alt="image" src="https://github.com/user-attachments/assets/0fb3c239-d664-483f-b611-de4bb1a2972f" />
+
 ### 2-4 두 값의 거리 계산하기
 
 <!-- 이 부분을 지우고 새롭게 배운 내용을 자유롭게 정리해주세요. -->
@@ -258,6 +289,10 @@ FROM location_2d
 ```
 
 <!-- 이 부분을 지우고 실행 결과 화면을 제출해주세요. -->
+
+<img width="245" height="209" alt="image" src="https://github.com/user-attachments/assets/a4a0f9be-2940-4510-be8a-dd2a8ce9e4aa" />
+
+<img width="204" height="135" alt="image" src="https://github.com/user-attachments/assets/50279f1a-a896-499d-bee3-144b838e5048" />
 
 ### 2-5 날짜/시간을 계산하기
 
@@ -314,6 +349,12 @@ FROM mst_users_with_dates;
 
 <!-- 이 부분을 지우고 실행 결과 화면을 제출해주세요. -->
 
+<img width="662" height="610" alt="image" src="https://github.com/user-attachments/assets/fd8f79de-e714-4f5f-8c60-9376e55324c3" />
+
+<img width="533" height="133" alt="image" src="https://github.com/user-attachments/assets/cad117b4-680b-43f8-a315-d31741aac493" />
+
+<img width="677" height="565" alt="image" src="https://github.com/user-attachments/assets/adabe7ac-4eab-44ba-b7f4-4a3e239efe51" />
+
 ### 2-6 IP 주소 다루기
 
 <!-- 이 부분을 지우고 새롭게 배운 내용을 자유롭게 정리해주세요. -->
@@ -357,6 +398,16 @@ FROM
 ```
 
 <!-- 이 부분을 지우고 실행 결과 화면을 제출해주세요. -->
+
+<img width="213" height="67" alt="image" src="https://github.com/user-attachments/assets/fc67ee6d-fe5c-4f4a-95e9-e31e84570c17" />
+
+<img width="150" height="69" alt="image" src="https://github.com/user-attachments/assets/abc35186-5d3d-46c9-8521-a7be020b06af" />
+
+<img width="610" height="83" alt="image" src="https://github.com/user-attachments/assets/737161d8-f291-428a-9d8f-0dc7151a026f" />
+
+<img width="303" height="82" alt="image" src="https://github.com/user-attachments/assets/23637dff-f7cc-43b8-8a35-8cefa88f5b4f" />
+
+<img width="263" height="79" alt="image" src="https://github.com/user-attachments/assets/4d37949f-7ab0-417c-8b10-13733441c9d0" />
 
 ## 03. 하나의 테이블에 대한 조작 
 
