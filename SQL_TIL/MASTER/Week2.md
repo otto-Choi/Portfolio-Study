@@ -450,6 +450,13 @@ FROM review;
 
 <!-- 이 부분을 지우고 실행 결과 화면을 제출해주세요. -->
 
+<img width="555" height="234" alt="Image" src="https://github.com/user-attachments/assets/b258e21b-8237-4ca4-8408-7cc05bdaca27" />
+
+<img width="547" height="613" alt="Image" src="https://github.com/user-attachments/assets/1891c11d-993d-477b-bcdd-faa0fdae74a6" />
+
+<img width="726" height="361" alt="Image" src="https://github.com/user-attachments/assets/e8f5874d-50ab-4c57-a385-170b2f3e4218" />
+
+
 ### 3-2 그룹 내부의 순서
 
 <!-- 이 부분을 지우고 새롭게 배운 내용을 자유롭게 정리해주세요. -->
@@ -551,6 +558,18 @@ FROM popular_products;
 
 <!-- 이 부분을 지우고 실행 결과 화면을 제출해주세요. -->
 
+<img width="648" height="307" alt="Image" src="https://github.com/user-attachments/assets/a5cfc7b9-43fa-4318-8d2f-45d389ab74fe" />
+
+<img width="637" height="309" alt="Image" src="https://github.com/user-attachments/assets/0911dbef-8f53-4863-a9d0-b1f30ac60e45" />
+
+<img width="667" height="208" alt="Image" src="https://github.com/user-attachments/assets/0db399b7-0752-4edd-975e-abcf83bac432" />
+
+<img width="700" height="294" alt="Image" src="https://github.com/user-attachments/assets/82d4bc5d-d67b-4014-a147-06b12e27e19a" />
+
+<img width="480" height="167" alt="Image" src="https://github.com/user-attachments/assets/7bf9dc64-1430-4ecd-b28d-3aea8867a5ea" />
+
+<img width="351" height="120" alt="Image" src="https://github.com/user-attachments/assets/d814814b-af16-4e62-ad1c-55d9b6dfed2b" />
+
 ### 3-3 세로 기반 데이터를 가로 기반으로 변환하기
 
 <!-- 이 부분을 지우고 새롭게 배운 내용을 자유롭게 정리해주세요. -->
@@ -575,6 +594,10 @@ ORDER BY purchase_id;
 ```
 
 <!-- 이 부분을 지우고 실행 결과 화면을 제출해주세요. -->
+
+<img width="588" height="109" alt="Image" src="https://github.com/user-attachments/assets/4550d4d2-4581-413e-ae52-fe26095fbe41" />
+
+<img width="457" height="149" alt="Image" src="https://github.com/user-attachments/assets/8615e4c8-2ed1-4a96-9a45-e86adee013f4" />
 
 ### 3-4 가로 기반 데이터를 세로 기반으로 변환하기
 
@@ -633,6 +656,11 @@ ON p.idx <= (
 
 <!-- 이 부분을 지우고 실행 결과 화면을 제출해주세요. -->
 
+<img width="373" height="435" alt="Image" src="https://github.com/user-attachments/assets/0c96eb0a-6434-4a12-90b6-cac3badc695d" />
+
+<img width="370" height="231" alt="Image" src="https://github.com/user-attachments/assets/cc4529aa-ac9a-4847-9f01-a9a55b7b4cd8" />
+
+<img width="565" height="238" alt="Image" src="https://github.com/user-attachments/assets/1e980833-9f0f-4834-9117-89aa16acfe13" />
 
 ## 04. 여러 개의 테이블 조작하기
 
@@ -649,6 +677,8 @@ SELECT 'app2' AS app_name, user_id, name, NULL AS email FROM app2_mst_users;
 ```
 
 <!-- 이 부분을 지우고 실행 결과 화면을 제출해주세요. -->
+
+<img width="532" height="170" alt="Image" src="https://github.com/user-attachments/assets/eeaa5bba-d665-42ce-a7cd-6e721fd42bf3" />
 
 ### 4-2 여러 개의 테이블을 가로로 정렬하기
 
@@ -696,6 +726,10 @@ FROM mst_categories AS m;
 
 <!-- 이 부분을 지우고 실행 결과 화면을 제출해주세요. -->
 
+<img width="523" height="238" alt="Image" src="https://github.com/user-attachments/assets/1349c4c9-9152-4b5e-b3fb-637c2817179f" />
+
+<img width="558" height="135" alt="Image" src="https://github.com/user-attachments/assets/dbd11ea6-f8e2-4703-a10a-c26a94b4ea13" />
+
 ### 4-3 조건 플래그를 0과 1로 표현하기
 
 <!-- 이 부분을 지우고 새롭게 배운 내용을 자유롭게 정리해주세요. -->
@@ -714,6 +748,8 @@ GROUP BY m.user_id, m.card_number;
 ```
 
 <!-- 이 부분을 지우고 실행 결과 화면을 제출해주세요. -->
+
+<img width="728" height="149" alt="Image" src="https://github.com/user-attachments/assets/9e436ce7-54e1-4436-bea8-d4c6ad2adf40" />
 
 ### 4-4 계산한 테이블에 이름 붙여 재사용하기
 
@@ -753,6 +789,8 @@ ORDER BY m.rank;
 
 <!-- 이 부분을 지우고 실행 결과 화면을 제출해주세요. -->
 
+<img width="742" height="172" alt="Image" src="https://github.com/user-attachments/assets/2e7be1fc-5ba2-4909-837f-0c4e0f879039" />
+
 ### 4-5 유사 테이블 만들기
 
 <!-- 이 부분을 지우고 새롭게 배운 내용을 자유롭게 정리해주세요. -->
@@ -770,11 +808,13 @@ FROM mst_users AS u
 LEFT JOIN mst_devices AS d
     ON u.register_device = d.device_id;
 ```
+<img width="314" height="141" alt="Image" src="https://github.com/user-attachments/assets/3feb7f08-177f-433a-9a60-650a8039c5c0" />
+
 
 <!-- 이 부분을 지우고 실행 결과 화면을 제출해주세요. -->
 
 
 
-처음엔 직접 작성도 하고 그랬는데... 분량이 좀 많아서 점점 교재 내용이라도 따라가고자 했음.
+처음엔 직접 작성도 하고 그랬는데... 분량이 좀 많아서 점점 교재 내용이라도 따라가고자 했슴니다...
 
 ### 🎉 수고하셨습니다.
