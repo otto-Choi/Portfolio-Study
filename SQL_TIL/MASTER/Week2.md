@@ -416,7 +416,36 @@ FROM
 <!-- 이 부분을 지우고 새롭게 배운 내용을 자유롭게 정리해주세요. -->
 
 ```sql
-여기에 코드를 적어주세요.
+SELECT
+    COUNT(*) AS total_count,
+    COUNT(DISTINCT user_id) AS user_count,
+    COUNT(DISTINCT product_id) AS product_count,
+    SUM(score) AS sum,
+    AVG(score) AS avg,
+    MAX(score) AS max,
+    MIN(score) AS min
+FROM review;
+
+SELECT
+    user_id,
+    COUNT(*) AS total_count,
+    COUNT(DISTINCT product_id) AS product_count,
+    SUM(score) AS sum,
+    AVG(score) AS avg,
+    MAX(score) AS max,
+    MIN(score) AS min
+FROM review
+GROUP BY user_id;
+
+
+SELECT
+    user_id,
+    product_id,
+    score,
+    AVG(score) OVER() AS avg_score,
+    AVG(score) OVER(PARTITION BY user_id) AS user_avg_score,
+    score - AVG(score) OVER(PARTITION BY user_id) AS user_avg_score_diff
+FROM review;
 ```
 
 <!-- 이 부분을 지우고 실행 결과 화면을 제출해주세요. -->
@@ -426,7 +455,98 @@ FROM
 <!-- 이 부분을 지우고 새롭게 배운 내용을 자유롭게 정리해주세요. -->
 
 ```sql
-여기에 코드를 적어주세요.
+SELECT
+    product_id,
+    score,
+    ROW_NUMBER() OVER(ORDER BY score DESC) AS row,
+    RANK()       OVER(ORDER BY score DESC) AS rank,
+    DENSE_RANK() OVER(ORDER BY score DESC) AS dense_rank,
+    LAG(product_id)    OVER(ORDER BY score DESC) AS lag1,
+    LAG(product_id, 2) OVER(ORDER BY score DESC) AS lag2,
+    LEAD(product_id)    OVER(ORDER BY score DESC) AS lead1,
+    LEAD(product_id, 2) OVER(ORDER BY score DESC) AS lead2
+FROM popular_products
+ORDER BY row;
+
+SELECT
+    product_id,
+    score,
+    ROW_NUMBER() OVER(ORDER BY score DESC) AS row,
+    SUM(score)
+        OVER(ORDER BY score DESC
+            ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW)
+        AS cum_score,
+    AVG(score)
+        OVER(ORDER BY score DESC
+            ROWS BETWEEN 1 PRECEDING AND 1 FOLLOWING)
+        AS local_avg,
+    FIRST_VALUE(product_id)
+        OVER(ORDER BY score DESC
+            ROWS BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED FOLLOWING)
+        AS first_value,
+    LAST_VALUE(product_id)
+        OVER(ORDER BY score DESC
+            ROWS BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED FOLLOWING)
+        AS last_value
+FROM popular_products
+ORDER BY row;
+
+SELECT
+    product_id,
+    ROW_NUMBER() OVER(ORDER BY score DESC) AS row,
+    array_agg(product_id)
+        OVER(ORDER BY score DESC
+            ROWS BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED FOLLOWING)
+        AS whole_agg,
+    array_agg(product_id)
+        OVER(ORDER BY score DESC
+            ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW)
+        AS cum_agg,
+    array_agg(product_id)
+        OVER(ORDER BY score DESC
+            ROWS BETWEEN 1 PRECEDING AND 1 FOLLOWING)
+        AS local_agg
+FROM popular_products
+WHERE category = 'action'
+ORDER BY row;
+
+SELECT
+    category,
+    product_id,
+    score,
+    ROW_NUMBER()
+        OVER(PARTITION BY category ORDER BY score DESC)
+        AS row,
+    RANK()
+        OVER(PARTITION BY category ORDER BY score DESC)
+        AS rank,
+    DENSE_RANK()
+        OVER(PARTITION BY category ORDER BY score DESC)
+        AS dense_rank
+FROM popular_products
+ORDER BY category, row;
+
+SELECT *
+FROM (
+    SELECT
+        category,
+        product_id,
+        score,
+        ROW_NUMBER()
+            OVER(PARTITION BY category ORDER BY score DESC)
+            AS rank
+    FROM popular_products
+) AS popular_products_with_rank
+WHERE rank <= 2
+ORDER BY category, rank;
+
+SELECT DISTINCT
+    category,
+    FIRST_VALUE(product_id)
+        OVER(PARTITION BY category ORDER BY score DESC
+            ROWS BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED FOLLOWING)
+        AS product_id
+FROM popular_products;
 ```
 
 <!-- 이 부분을 지우고 실행 결과 화면을 제출해주세요. -->
@@ -436,7 +556,22 @@ FROM
 <!-- 이 부분을 지우고 새롭게 배운 내용을 자유롭게 정리해주세요. -->
 
 ```sql
-여기에 코드를 적어주세요.
+SELECT
+    dt,
+    MAX(CASE WHEN indicator = 'impressions' THEN val END) AS impressions,
+    MAX(CASE WHEN indicator = 'sessions'    THEN val END) AS sessions,
+    MAX(CASE WHEN indicator = 'users'       THEN val END) AS users
+FROM daily_kpi
+GROUP BY dt
+ORDER BY dt;
+
+SELECT
+    purchase_id,
+    string_agg(product_id, ',') AS product_ids,
+    SUM(price) AS amount
+FROM purchase_detail_log
+GROUP BY purchase_id
+ORDER BY purchase_id;
 ```
 
 <!-- 이 부분을 지우고 실행 결과 화면을 제출해주세요. -->
@@ -446,7 +581,54 @@ FROM
 <!-- 이 부분을 지우고 새롭게 배운 내용을 자유롭게 정리해주세요. -->
 
 ```sql
-여기에 코드를 적어주세요.
+SELECT
+    q.year,
+    CASE
+        WHEN p.idx = 1 THEN 'q1'
+        WHEN p.idx = 2 THEN 'q2'
+        WHEN p.idx = 3 THEN 'q3'
+        WHEN p.idx = 4 THEN 'q4'
+    END AS quarter,
+    CASE
+        WHEN p.idx = 1 THEN q.q1
+        WHEN p.idx = 2 THEN q.q2
+        WHEN p.idx = 3 THEN q.q3
+        WHEN p.idx = 4 THEN q.q4
+    END AS sales
+FROM quarterly_sales AS q
+CROSS JOIN (
+         SELECT 1 AS idx
+    UNION ALL SELECT 2 AS idx
+    UNION ALL SELECT 3 AS idx
+    UNION ALL SELECT 4 AS idx
+) AS p;
+
+SELECT
+    purchase_id,
+    product_id
+FROM purchase_log AS p
+CROSS JOIN unnest(string_to_array(product_ids, ',')) AS product_id;
+
+SELECT
+    purchase_id,
+    regexp_split_to_table(product_ids, ',') AS product_id
+FROM purchase_log;
+
+SELECT
+    l.purchase_id,
+    l.product_ids,
+    p.idx,
+    split_part(l.product_ids, ',', p.idx) AS product_id
+FROM purchase_log AS l
+JOIN (
+         SELECT 1 AS idx
+    UNION ALL SELECT 2 AS idx
+    UNION ALL SELECT 3 AS idx
+) AS p
+ON p.idx <= (
+    1 + char_length(l.product_ids)
+    - char_length(replace(l.product_ids, ',', ''))
+);
 ```
 
 <!-- 이 부분을 지우고 실행 결과 화면을 제출해주세요. -->
@@ -458,8 +640,12 @@ FROM
 
 <!-- 이 부분을 지우고 새롭게 배운 내용을 자유롭게 정리해주세요. -->
 
+UNION DISTINCT는 잘 쓰이지 않는다... 음...
+
 ```sql
-여기에 코드를 적어주세요.
+SELECT 'appl' AS app_name, user_id, name, email FROM app1_mst_users
+UNION ALL
+SELECT 'app2' AS app_name, user_id, name, NULL AS email FROM app2_mst_users;
 ```
 
 <!-- 이 부분을 지우고 실행 결과 화면을 제출해주세요. -->
@@ -469,7 +655,43 @@ FROM
 <!-- 이 부분을 지우고 새롭게 배운 내용을 자유롭게 정리해주세요. -->
 
 ```sql
-여기에 코드를 적어주세요.
+SELECT
+    m.category_id,
+    m.name,
+    s.sales,
+    r.product_id AS sale_product
+FROM mst_categories AS m
+JOIN category_sales AS s
+    ON m.category_id = s.category_id
+JOIN product_sale_ranking AS r
+    ON m.category_id = r.category_id;
+
+SELECT
+    m.category_id,
+    m.name,
+    s.sales,
+    r.product_id AS top_sale_product
+FROM mst_categories AS m
+LEFT JOIN category_sales AS s
+    ON m.category_id = s.category_id
+LEFT JOIN product_sale_ranking AS r
+    ON m.category_id = r.category_id
+    AND r.rank = 1;
+
+SELECT
+    m.category_id,
+    m.name,
+    (SELECT s.sales
+        FROM category_sales AS s
+        WHERE m.category_id = s.category_id
+    ) AS sales,
+    (SELECT r.product_id
+        FROM product_sale_ranking AS r
+        WHERE m.category_id = r.category_id
+        ORDER BY sales DESC
+        LIMIT 1
+    ) AS top_sale_product
+FROM mst_categories AS m;
 ```
 
 <!-- 이 부분을 지우고 실행 결과 화면을 제출해주세요. -->
@@ -479,7 +701,16 @@ FROM
 <!-- 이 부분을 지우고 새롭게 배운 내용을 자유롭게 정리해주세요. -->
 
 ```sql
-여기에 코드를 적어주세요.
+SELECT
+    m.user_id,
+    m.card_number,
+    COUNT(p.user_id) AS purchase_count,
+    CASE WHEN m.card_number IS NOT NULL THEN 1 ELSE 0 END AS has_card,
+    SIGN(COUNT(p.user_id)) AS has_purchased
+FROM mst_users_with_card_number AS m
+LEFT JOIN purchase_log AS p
+    ON m.user_id = p.user_id
+GROUP BY m.user_id, m.card_number;
 ```
 
 <!-- 이 부분을 지우고 실행 결과 화면을 제출해주세요. -->
@@ -489,7 +720,35 @@ FROM
 <!-- 이 부분을 지우고 새롭게 배운 내용을 자유롭게 정리해주세요. -->
 
 ```sql
-여기에 코드를 적어주세요.
+WITH product_sale_ranking AS (
+    SELECT
+        category_name,
+        product_id,
+        sales,
+        ROW_NUMBER() OVER(PARTITION BY category_name ORDER BY sales DESC) AS rank
+    FROM product_sales),
+mst_rank AS (
+    SELECT DISTINCT rank
+    FROM product_sale_ranking)
+SELECT
+    m.rank,
+    r1.product_id AS dvd,
+    r1.sales      AS dvd_sales,
+    r2.product_id AS cd,
+    r2.sales      AS cd_sales,
+    r3.product_id AS book,
+    r3.sales      AS book_sales
+FROM mst_rank AS m
+LEFT JOIN product_sale_ranking AS r1
+    ON m.rank = r1.rank
+    AND r1.category_name = 'dvd'
+LEFT JOIN product_sale_ranking AS r2
+    ON m.rank = r2.rank
+    AND r2.category_name = 'cd'
+LEFT JOIN product_sale_ranking AS r3
+    ON m.rank = r3.rank
+    AND r3.category_name = 'book'
+ORDER BY m.rank;
 ```
 
 <!-- 이 부분을 지우고 실행 결과 화면을 제출해주세요. -->
@@ -499,11 +758,23 @@ FROM
 <!-- 이 부분을 지우고 새롭게 배운 내용을 자유롭게 정리해주세요. -->
 
 ```sql
-여기에 코드를 적어주세요.
+WITH mst_devices AS (
+         SELECT 1 AS device_id, 'PC'          AS device_name
+    UNION ALL SELECT 2 AS device_id, 'SP'          AS device_name
+    UNION ALL SELECT 3 AS device_id, '애플리케이션' AS device_name
+)
+SELECT
+    u.user_id,
+    d.device_name
+FROM mst_users AS u
+LEFT JOIN mst_devices AS d
+    ON u.register_device = d.device_id;
 ```
 
 <!-- 이 부분을 지우고 실행 결과 화면을 제출해주세요. -->
 
 
+
+처음엔 직접 작성도 하고 그랬는데... 분량이 좀 많아서 점점 교재 내용이라도 따라가고자 했음.
 
 ### 🎉 수고하셨습니다.
