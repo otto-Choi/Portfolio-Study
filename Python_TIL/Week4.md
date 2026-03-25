@@ -162,24 +162,14 @@ df = pd.DataFrame(data)
 
 <!-- 이 부분을 지우고 인증 사진을 제출해주세요.-->
 '''python
-# 1. 데이터 확인 및 기초 통계 출력
-#   - 문제 설명: 요약 정보 확인 
-#   - describe() 메서드를 사용하여 수치형 데이터(가격, 판매량 등)의 기술 통계 정보를 출력하세요.
-#   - print()를 이용해 기술 통계 결과를 화면에 출력하세요.
 data = pd.DataFrame(data)
 print(data.describe())
 print()
-# 2. 특정 조건의 데이터 필터링 (불리언 색인)
-#   - 문제 설명: 현재 재고가 하나도 없는(0인) 도서 찾기 
-#   - stock 열의 값이 0인 행만 추출하여 새로운 변수에 저장하세요.
-#   - print()를 이용해 재고가 0인 도서의 정보를 출력하세요.
+
 out_of_stock = data[data["stock"] == 0]
 print(out_of_stock)
 print()
-# 3. 새로운 열 추가 (파생 변수 생성)
-#   - 문제 설명: 각 도서별 총 매출액(total_revenue) 계산
-#   - price와 sales_count를 곱하여 total_revenue라는 새로운 열을 추가하세요.
-#   - print()를 이용해 새로운 열이 추가된 DataFrame의 상단 5행(head)을 출력하세요.
+
 data["total_revenue"] = data["price"] * data["sales_count"]
 print(data.head())
 '''
