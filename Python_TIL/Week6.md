@@ -49,12 +49,18 @@
 
 <!-- 이 부분을 지우고 새롭게 배우게 된 내용을 정리해주세요. -->
 
+확장형 시스템: 판다스에서 개발한, 넘파이에서 기본적으로 지원하지 않는 자료형이더라도 사용할 수 있도록 하는 시스템. \
+이러한 새로운 자료형은 넘파이 배열에서 가져오는 데이터와 동일하게 취급됨.
+
 ### 실습 인증
 
 <!-- 예제 실습을 진행한 후, 실행 화면을 2-3장 캡쳐하여 제출해주세요. -->
 
 <!-- 이 부분을 지우고 실행 화면을 제출해주세요. -->
 
+<img width="519" height="704" alt="Image" src="https://github.com/user-attachments/assets/2112b4de-ab94-468e-abae-b66966108a08" />
+
+<img width="548" height="572" alt="Image" src="https://github.com/user-attachments/assets/3b922691-e1d4-4676-8cff-e7683c3dd659" />
 
 ## 2. 문자열 다루기 
 
@@ -62,12 +68,19 @@
 
 <!-- 이 부분을 지우고 새롭게 배우게 된 내용을 정리해주세요. -->
 
+split 메소드로 구분자를 이용하여 문자열을 분리하고, strip을 이용하여 공백 문자를 제거 한 뒤 더하기 연산 또는 join 메서드를 이용하여 다시 합칠 수 있다.
+
+find는 문자열을 찾지 못하면 -1을 반환하지만 index는 문자열을 찾지 못하면 에러가 발생한다.
+
 ### 실습 인증
 
 <!-- 예제 실습을 진행한 후, 실행 화면을 2-3장 캡쳐하여 제출해주세요. -->
 
 <!-- 이 부분을 지우고 실행 화면을 제출해주세요. -->
 
+<img width="439" height="830" alt="Image" src="https://github.com/user-attachments/assets/a5193937-0ccf-4d01-bc67-157dd6587a61" />
+
+<img width="746" height="392" alt="Image" src="https://github.com/user-attachments/assets/d6c25e16-936d-42dd-bca0-8fb8990a369c" />
 
 ## 3. 범주형 데이터
 
@@ -81,6 +94,9 @@
 
 <!-- 이 부분을 지우고 실행 화면을 제출해주세요. -->
 
+<img width="769" height="798" alt="Image" src="https://github.com/user-attachments/assets/0a6aa9da-e7b9-405e-b267-e8bee1a0e64a" />
+
+<img width="735" height="339" alt="Image" src="https://github.com/user-attachments/assets/2db56285-bafa-4851-92a5-cb42f9ab45dd" />
 
 ## 4. 계층적 색인 
 
@@ -93,6 +109,11 @@
 <!-- 예제 실습을 진행한 후, 실행 화면을 2-3장 캡쳐하여 제출해주세요. -->
 
 <!-- 이 부분을 지우고 실행 화면을 제출해주세요. -->
+
+<img width="535" height="397" alt="Image" src="https://github.com/user-attachments/assets/05834b13-e5f1-4734-898f-de7c52d178e5" />
+
+<img width="397" height="519" alt="Image" src="https://github.com/user-attachments/assets/04fb7c5d-60bc-41d0-9f50-d78a3ba86f13" />
+
 
 
 ## 5. 데이터 합치기 
@@ -107,6 +128,9 @@
 
 <!-- 이 부분을 지우고 실행 화면을 제출해주세요. -->
 
+<img width="550" height="448" alt="Image" src="https://github.com/user-attachments/assets/bef04002-682f-450b-98c3-ac1e2dca241b" />
+
+<img width="563" height="327" alt="Image" src="https://github.com/user-attachments/assets/97640b26-7df5-431c-be99-f05dce8188a4" />
 
 ## 6. 재구성과 피벗 
 
@@ -120,7 +144,9 @@
 
 <!-- 이 부분을 지우고 실행 화면을 제출해주세요. -->
 
+<img width="726" height="248" alt="Image" src="https://github.com/user-attachments/assets/ca30e5c2-3057-42d0-8257-d1c7200e1849" />
 
+<img width="513" height="454" alt="Image" src="https://github.com/user-attachments/assets/1cf1ebb9-07a5-4ced-9705-0c4fa744c77f" />
 
 # 2️⃣ 실습 과제
 
@@ -169,7 +195,22 @@ purchases = pd.DataFrame({
 
 <!-- 이 부분을 지우고 인증 사진을 제출해주세요.-->
 
+```python
+# 1
+customers = customers.drop_duplicates(subset= 'customer_id')
+customers['age_group'] = pd.cut(customers['age'], bins = [10, 20, 30, 101], labels = ['10대', '20대', '30대 이상'])
+print(customers)
 
+# 2
+customers['domain'] = customers['email'].str.split('@').str.get(1)
+print(customers)
+
+# 3
+df = pd.merge(customers, purchases, on = 'customer_id', how = 'outer')
+print(df)
+```
+
+<img width="1052" height="881" alt="Image" src="https://github.com/user-attachments/assets/d4cfc634-3741-4a51-8688-0b08d722ecd8" />
 
 ### 🎉 수고하셨습니다.
 
